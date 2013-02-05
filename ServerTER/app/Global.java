@@ -14,7 +14,6 @@ import com.codahale.jerkson.util.scalax.rules.scalasig.ClassFileParser.Annotatio
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
 import com.mongodb.Mongo;
-
 import controllers.MorphiaObject;
 
 public class Global extends GlobalSettings 

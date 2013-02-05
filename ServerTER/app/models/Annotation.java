@@ -15,14 +15,15 @@ import com.google.code.morphia.annotations.Id;
 @Entity//("Annotation")
 public class Annotation {
 
-	@Id private ObjectId id;
+	@Id 
+	private ObjectId id;
 	private String nom;
+	private Timecode timecode;
+	private String commentaire; // video ?
 	//private User user;
 	//private Date date;
-	private Timecode timecode;
 	//private Phase phase;
 	//private Intervenant intervenant;
-	private String commentaire; // video ?
 	//private Video videoAnnotee; // ?
 
 	

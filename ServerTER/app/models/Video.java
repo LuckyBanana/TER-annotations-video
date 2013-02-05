@@ -72,5 +72,5 @@ public class Video extends Model {
 	public Video() {
 		
 	}
-
+	
 }
