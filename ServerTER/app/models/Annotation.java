@@ -13,20 +13,7 @@ public class Annotation {
 	@Id 
 	private ObjectId id;
 	private String nom;
-<<<<<<< HEAD
-	private Timecode timecode;
-	private String commentaire; // video ?
-	//private User user;
-	//private Date date;
-	//private Phase phase;
-	//private Intervenant intervenant;
-	//private Video videoAnnotee; // ?
 
-	
-	public Annotation() {
-		
-	}
-=======
 	private String commentaire;
 	private String timecodeDebut;
 	private String timecodeFin;
@@ -35,7 +22,7 @@ public class Annotation {
 	//private Timecode timecode;
 	//private Phase phase;
 	//private Intervenant intervenant;
->>>>>>> squelette api
+
 	
 	/*
 	 * ACCESSEURS
