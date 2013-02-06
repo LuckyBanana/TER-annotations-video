@@ -16,10 +16,15 @@ public class Video extends Model {
 	@Id
 	private ObjectId id;
 	private String nom;
-	private String user; // protected User user;
-	private Date date;
 	private int stream; // stream video ?
 	private Vector<Annotation> annotations;
+	
+	// protected User user;
+	// private Date date;
+	
+	/*
+	 * ACCESSEURS
+	 */
 	
 	public ObjectId getId() {
 		return id;
@@ -35,22 +40,6 @@ public class Video extends Model {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public int getStream() {

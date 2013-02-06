@@ -27,20 +27,27 @@ public class Annotations extends Controller{
 	
 	public static Result save() throws Exception{
 		
-		Annotation a = new Annotation("nom 1", new Timecode(), "commentaire 1");
 		Form<Annotation> formAnnot = form(Annotation.class).bindFromRequest();
 		if(formAnnot.hasErrors()) {
 			return(ok("Erreur"));
 		}
 		else {
 			
-			MorphiaObject.datastore.save(a);//formAnnot.get());
+			MorphiaObject.datastore.save();//formAnnot.get());
 		}
-		
-		
-		
+
 		return ok("Post");
 		
+	}
+	
+	public static Result getById(String id) {
+		
+		return ok();
+	}
+	
+	public static Result delete(String id) {
+		
+		return ok();
 	}
 	
 }
