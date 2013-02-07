@@ -8,27 +8,20 @@ import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
 
+import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import java.io.FileInputStream;
 
-public class Videos extends Controller{
+public class Videos  extends Controller{
+	
+	private static String dirFile = "C:\\Users\\Administrateur\\Desktop\\Zics\\danm\\Umek - Analok.mp3";
+	private static String nameGFS = "mp3";
 
+	
 	public static Result saveBinary(String id, String myDirFile) throws IOException
 	{
-
-		File file = new File(myDirFile);
-		GridFS gridfs = new GridFS(MorphiaObject.datastore.getDB(), "videos");
-		GridFSInputFile gfsFile = null;
-		try {
-			gfsFile = gridfs.createFile(file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		gfsFile.setFilename(file.getName());
-		gfsFile.save();
-		
 		return ok();
 	}
 	
@@ -38,24 +31,46 @@ public class Videos extends Controller{
 		return ok(Json.toJson(cursor.toArray()));
 	}
 	
-	public static Result getVideo(String id) {
-		
-		return ok();
-	}
-	
 	public static Result getAnnotationsOnVideo(String id) {
 		
 		return ok();
 	}
 	
-	public static Result save() {
+	public static Result save(String nameFile) throws Exception
+	{
 		
-		return ok();
-	}
-	
-	public static Result delete(String id) {
+		try {
+			
+			GridFS gridFS = new GridFS(MorphiaObject.mongo.getDB("test"), nameGFS);
+			File file = new File(dirFile);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			GridFSInputFile gfsFile = gridFS.createFile(fileInputStream);
+			gfsFile.setFilename(nameFile);
+			gfsFile.save();
+			
+		} catch (IOException e) {
+			
+				Logger.debug(e.toString());
+				e.printStackTrace();
+				return ok("File SAVE : ERROR");
+		}
 		
-		return ok();
+		
+		return ok("File SAVE : OK");
 	}
 
+	public static Result delete(String nameFile) throws Exception
+	{	
+		GridFS gfsFile = new GridFS(MorphiaObject.mongo.getDB("test"), nameGFS);
+		gfsFile.remove(gfsFile.findOne(nameFile));
+		return ok("File DELETE : OK");
+	}
+	
+	public static Result getVideo(String nameFile) throws Exception
+	{	
+		GridFS gfsFile = new GridFS(MorphiaObject.mongo.getDB("test"), nameGFS);
+		GridFSDBFile outputFile = gfsFile.findOne(nameFile);
+		return ok(outputFile.toString());
+	}
+	
 }

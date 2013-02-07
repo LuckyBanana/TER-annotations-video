@@ -11,12 +11,16 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 OPTIONS /api/*url                      controllers.Application.options(url: String)
 
 #Videos
-GET /api/video                          controllers.Videos.list()
-GET /api/video/:id					    controllers.Videos.getVideo(id: String)
-GET /api/video/:id/annotations		    controllers.Videos.getAnnotationsOnVideo(id: String)
-POST /api/video						    controllers.Videos.save()
-POST /api/video/:id/:myDirFile          controllers.Videos.saveBinary(id: String, myDirFile: String)
-DELETE /api/video/:id					controllers.Videos.delete(id: String)
+#GET /api/video                          controllers.Videos.list()
+#GET /api/video/:id					    controllers.Videos.getVideo(id: String)
+#GET /api/video/:id/annotations		    controllers.Videos.getAnnotationsOnVideo(id: String)
+#POST /api/video						    controllers.Videos.save()
+#POST /api/video/:id/:myDirFile          controllers.Videos.saveBinary(id: String, myDirFile: String)
+#DELETE /api/video/:id					controllers.Videos.delete(id: String)
+
+GET /api/video/:nameFile			    controllers.Videos.getVideo(nameFile: String)
+POST /api/video/:nameFile				controllers.Videos.save(nameFile : String)
+DELETE /api/video/:nameFile					controllers.Videos.delete(nameFile: String)
 
 #Annotations
 GET /api/annotation                     controllers.Annotations.list()
