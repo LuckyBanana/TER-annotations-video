@@ -1,25 +1,24 @@
 package models;
 
-import java.util.Date;
+import java.io.File;
+import java.io.Serializable;
 import java.util.Vector;
 
 import org.bson.types.ObjectId;
 
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Reference;
 
-import play.db.ebean.Model;
-
-@Entity
-public class Video extends Model {
+@Entity("Video")
+public class Video implements Serializable{
 	
 	@Id
 	private ObjectId id;
 	private String nom;
-	private int stream; // stream video ?
+	private File stream;
 	private Vector<Annotation> annotations;
-	
-	// protected User user;
+	// private User user;
 	// private Date date;
 	
 	/*
@@ -42,11 +41,11 @@ public class Video extends Model {
 		this.nom = nom;
 	}
 
-	public int getStream() {
+	public File getStream() {
 		return stream;
 	}
 
-	public void setStream(int stream) {
+	public void setStream(File stream) {
 		this.stream = stream;
 	}
 
@@ -57,9 +56,18 @@ public class Video extends Model {
 	public void setAnnotations(Vector<Annotation> annotations) {
 		this.annotations = annotations;
 	}
-
+	
 	public Video() {
-		
+		stream = null;
+		annotations = new Vector<Annotation>();
 	}
+	
+	public Video(String n, File f) {
+		nom = n;
+		stream = f;
+		annotations = new Vector<Annotation>();
+	}
+	
+	
 	
 }

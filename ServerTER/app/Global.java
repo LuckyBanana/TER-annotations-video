@@ -2,18 +2,15 @@
 
 import java.net.UnknownHostException;
 
-import models.Intervenant;
-import models.Timecode;
-import models.User;
+import models.Annotation;
 import models.Video;
-
 import play.GlobalSettings;
 import play.Logger;
 
-import com.codahale.jerkson.util.scalax.rules.scalasig.ClassFileParser.Annotation;
-import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
 import com.mongodb.Mongo;
+import com.mongodb.gridfs.GridFS;
+
 import controllers.MorphiaObject;
 
 public class Global extends GlobalSettings 
@@ -33,14 +30,18 @@ public class Global extends GlobalSettings
 		
 		MorphiaObject.morphia = new Morphia();
 		
-		
+		MorphiaObject.morphia.map(Annotation.class);
+		MorphiaObject.morphia.map(Video.class);
+
+		/*
 		MorphiaObject.morphia.mapPackageFromClass(Annotation.class);
 		MorphiaObject.morphia.mapPackageFromClass(Video.class);
 		MorphiaObject.morphia.mapPackageFromClass(Timecode.class);
 		MorphiaObject.morphia.mapPackageFromClass(User.class);
 		MorphiaObject.morphia.mapPackageFromClass(Intervenant.class);
-		
-		MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "test");	
+		*/
+		MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "test");
+		MorphiaObject.fs = new GridFS(MorphiaObject.datastore.getDB(), "Video");
 		
 		//MorphiaObject.datastore.ensureIndexes();
 		MorphiaObject.datastore.ensureCaps();
