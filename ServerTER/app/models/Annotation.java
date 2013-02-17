@@ -59,6 +59,20 @@ public class Annotation {
 		this.timecodeFin = timecodeFin;
 	}
 	
+	public Annotation() {
+		
+	}
+	
+	public Annotation(String n) {
+		nom = n;
+	}
+	
+	public Annotation(String n, String c, String td, String tf) {
+		nom = n;
+		commentaire = c;
+		timecodeDebut = td;
+		timecodeFin = tf;
+	}
 
 	
 	

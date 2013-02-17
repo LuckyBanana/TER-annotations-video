@@ -3,6 +3,7 @@
 import java.net.UnknownHostException;
 
 import models.Annotation;
+import models.Fichier;
 import models.Video;
 import play.GlobalSettings;
 import play.Logger;
@@ -32,6 +33,7 @@ public class Global extends GlobalSettings
 		
 		MorphiaObject.morphia.map(Annotation.class);
 		MorphiaObject.morphia.map(Video.class);
+		MorphiaObject.morphia.map(Fichier.class);
 
 		/*
 		MorphiaObject.morphia.mapPackageFromClass(Annotation.class);
@@ -50,3 +52,4 @@ public class Global extends GlobalSettings
 
 	}
 }
+
