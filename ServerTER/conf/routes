@@ -31,5 +31,3 @@ DELETE /api/annotation/:id				controllers.Annotations.delete(id: String)
 #Users
 #GET /api/user                	        controllers.Users.list()
 #POST /api/user               	        controllers.User.createUser()
-
-

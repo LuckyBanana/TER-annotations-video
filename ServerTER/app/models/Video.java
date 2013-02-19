@@ -16,9 +16,7 @@ public class Video{
 	@Id
 	private ObjectId id;
 	private String nom;
-	//private File stream;
-	@Embedded
-	private Fichier stream;
+	private String path;
 	@Embedded
 	private Vector<Annotation> annotations;
 	// private User user;
@@ -43,15 +41,7 @@ public class Video{
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	/*
-	public File getStream() {
-		return stream;
-	}
-
-	public void setStream(File stream) {
-		this.stream = stream;
-	}
-	*/
+	
 	public Vector<Annotation> getAnnotations() {
 		return annotations;
 	}
@@ -61,36 +51,35 @@ public class Video{
 	}
 	
 	public Video() {
-		setStream(null);
 		annotations = new Vector<Annotation>();
 	}
 	
-	public Video(String n, Fichier f) {
+	public Video(String n, String p) {
 		nom = n;
-		setStream(f);
+		path = p;
 		annotations = new Vector<Annotation>();
 	}
 	
-	public Video(String n, File f) throws IOException {
+	public Video(String n, File f) {
 		nom = n;
-		setStream(new Fichier(f));
-		annotations = new Vector<Annotation>();
-	}
-	
-	public Video(String n, File f, String e) throws IOException {
-		nom = n;
-		setStream(new Fichier(e, f));
 		annotations = new Vector<Annotation>();
 	}
 
-	public Fichier getStream() {
-		return stream;
+	public String getPath() {
+		return path;
 	}
 
-	public void setStream(Fichier stream) {
-		this.stream = stream;
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 	
+	public void upload() {
+		
+	}
+	
+	public void download() {
+		
+	}
 	
 }
