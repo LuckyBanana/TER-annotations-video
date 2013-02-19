@@ -5,8 +5,7 @@
 # Home page
 GET     /                           controllers.Application.index()
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /*file               controllers.Assets.at(path="/public", file)
+
 
 OPTIONS /api/*url						controllers.Application.options(url: String)
 
@@ -31,3 +30,6 @@ DELETE /api/annotation/:id				controllers.Annotations.delete(id: String)
 #Users
 #GET /api/user                	        controllers.Users.list()
 #POST /api/user               	        controllers.User.createUser()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /*file               controllers.Assets.at(path="/public", file)
