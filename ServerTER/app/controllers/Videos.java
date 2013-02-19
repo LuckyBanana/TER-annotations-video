@@ -13,6 +13,8 @@ import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
+import views.html.index;
+import views.html.main;
 
 public class Videos  extends Controller{
 		
@@ -47,7 +49,7 @@ public class Videos  extends Controller{
 			file.renameTo(new File(path));
 			file.delete();
 			MorphiaObject.datastore.save(new Video(fileName, path));
-			return ok(file.getAbsolutePath());
+			return ok("File uploaded");
 
 
 		} else {
@@ -72,8 +74,12 @@ public class Videos  extends Controller{
 	
 	public static Result getVideo(String id) throws Exception
 	{	
-		
-		return ok();
+		List<Video> res = MorphiaObject.datastore.find(Video.class).asList();
+		Video vid = res.get(0);
+		//response().setHeader("Content-Disposition", "attachment; filename=oasis.mp4");
+		response().setContentType("video/mp4");
+		File f = new File("oasis.mp4");
+		return ok(index.render("oasis.mp4"));
 	}
 	
 	
@@ -81,11 +87,8 @@ public class Videos  extends Controller{
 	
 	public static Result saveBinary(String id/*, File file*/) throws IOException
 	{
-		List<Video> res = MorphiaObject.datastore.find(Video.class).asList();
-		Video vid = res.get(0);
-		File f = new File("oasis.mp4");
 		
-		return ok(f);
+		return ok();
 	}
 	
 }
