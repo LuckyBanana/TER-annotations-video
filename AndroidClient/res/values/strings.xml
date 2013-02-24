@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AndroidClient</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="ajouter">+</string>
-    <string name="text_nom">Nom</string>
-    <string name="text_commentaire">Commentaire</string>
-    <string name="text_tcdm">00</string>
-    <string name="text_tcds">00</string>
-    <string name="text_tcfm">05</string>
-    <string name="text_tcfs">00</string>
-    <string name="title_activity_annotation">AnnotationActivity</string>
-    <string name="bouton_valider">Valider</string>
-    <string name="text_nouvelle_annotation">Nouvelle Annotation</string>
-    <string name="bouton_debut_annotation">Debut</string>
-    <string name="bouton_fin_annotation">Fin</string>
+    <string name="hello">Hello World, AnnotationVideo!</string>
+    <string name="app_name">Android Client</string>
 
 </resources>
