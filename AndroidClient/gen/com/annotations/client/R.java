@@ -30,6 +30,7 @@ public final class R {
         public static final int button1=0x7f08000c;
         public static final int textCommentaire=0x7f080003;
         public static final int textNom=0x7f080002;
+        public static final int text_index=0x7f08000b;
         public static final int text_nouvelle_annotation=0x7f080001;
         public static final int timecodeDebutMin=0x7f080005;
         public static final int timecodeDebutSec=0x7f080006;
@@ -37,7 +38,6 @@ public final class R {
         public static final int timecodeFinSec=0x7f080009;
         public static final int validerAnnotation=0x7f08000a;
         public static final int videoMin=0x7f080000;
-        public static final int videoView1=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_annotation=0x7f030000;
@@ -54,8 +54,10 @@ public final class R {
         public static final int bouton_debut_annotation=0x7f05000d;
         public static final int bouton_fin_annotation=0x7f05000e;
         public static final int bouton_valider=0x7f05000b;
+        public static final int chooser_title=0x7f05000f;
         public static final int hello_world=0x7f050002;
         public static final int text_commentaire=0x7f050005;
+        public static final int text_index=0x7f050010;
         public static final int text_nom=0x7f050004;
         public static final int text_nouvelle_annotation=0x7f05000c;
         public static final int text_tcdm=0x7f050006;

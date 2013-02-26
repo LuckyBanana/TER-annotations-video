@@ -4,7 +4,7 @@
     <string name="app_name">AndroidClient</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="ajouter">+</string>
+    <string name="ajouter">Ajouter Video</string>
     <string name="text_nom">Nom</string>
     <string name="text_commentaire">Commentaire</string>
     <string name="text_tcdm">00</string>
@@ -16,5 +16,7 @@
     <string name="text_nouvelle_annotation">Nouvelle Annotation</string>
     <string name="bouton_debut_annotation">Debut</string>
     <string name="bouton_fin_annotation">Fin</string>
+    <string name="chooser_title">Choisir</string>
+    <string name="text_index">Annotations Video</string>
 
 </resources>

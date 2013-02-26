@@ -1,16 +1,13 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import com.annotations.client.AnnotationsRESTClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 public class Annotation {
 
@@ -63,21 +60,30 @@ public class Annotation {
 	}
 	
 	public void post() {
-		HttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost("url_du_server/api/annotation");
+		RequestParams params = new RequestParams();
+		params.put("nom", getNom());
+		params.put("commentaire", getCommentaire());
+		params.put("timecodeDebut", getTimecodeDebut());
+		params.put("timecodeFin", getTimecodeFin());
 		
-		try {
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-		     nameValuePairs.add(new BasicNameValuePair("name", getNom()));
-		     nameValuePairs.add(new BasicNameValuePair("commentaire", getCommentaire()));
-		     nameValuePairs.add(new BasicNameValuePair("timecodeDebut", getTimecodeDebut()));
-		     nameValuePairs.add(new BasicNameValuePair("timecodeFin", getTimecodeFin()));
-		     post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		     HttpResponse response = client.execute(post);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+		AnnotationsRESTClient.post("api/annotation", params, new JsonHttpResponseHandler() {
+			 @Override
+	            public void onSuccess(JSONArray response) {
+	                // Pull out the first event on the public timeline
+	                JSONObject firstEvent;
+					try {
+						firstEvent = (JSONObject) response.get(0);
+		                String tweetText = firstEvent.getString("text");
+
+		                // Do something with the response
+		                System.out.println(tweetText);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+	            }
+		});
 	}
 	
 	

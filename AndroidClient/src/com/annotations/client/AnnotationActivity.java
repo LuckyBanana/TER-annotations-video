@@ -1,14 +1,12 @@
 package com.annotations.client;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import models.Annotation;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,8 +22,15 @@ public class AnnotationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_annotation);
+		
+		Intent intent = getIntent();
+		String path = intent.getStringExtra(MainActivity.PATH);
+		
 		final VideoView vid = (VideoView)findViewById(R.id.videoMin);
-		vid.setVideoPath("sdcard/video.3gp");
+		
+		//vid.setVideoPath("sdcard/video.3gp");
+		vid.setVideoPath(path);
+		
 		MediaController mc = new MediaController(this);
 		mc.setAnchorView(vid);
 		vid.setMediaController(mc);
@@ -116,6 +121,11 @@ public class AnnotationActivity extends Activity {
 		return true;
 	}
 	
+	/*
+	 * Retourne une liste contenant deux chaines
+	 * Secondes : index = 0
+	 * Minutes : index = 1
+	 */
 	public List<String> CurrentPositionToSecAndMin(String cp) {
 		String sec;
 		String min;
