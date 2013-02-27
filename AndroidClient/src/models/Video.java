@@ -1,5 +1,6 @@
 package models;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -17,6 +18,7 @@ public class Video {
 	private String id;
 	private String nom;
 	private String path;
+	private File stream;
 	private Vector<Annotation> annotations;
 	
 	public Video() {
@@ -78,6 +80,14 @@ public class Video {
 		}
 		
 		return id;
+	}
+
+	public File getStream() {
+		return stream;
+	}
+
+	public void setStream(File stream) {
+		this.stream = stream;
 	}
 	
 

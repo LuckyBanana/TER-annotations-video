@@ -2,8 +2,11 @@ package com.annotations.client;
 
 import models.Video;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,17 +26,29 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		ConnectivityManager connMgr = (ConnectivityManager) 
+				getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		if (networkInfo != null && networkInfo.isConnected()) {
+			/*
+			 * Mode connecté
+			 */
+			System.out.println("Connecté !");
+		} else {
+			/*
+			 * Mode hors connexion
+			 */
+			System.out.println("Déconnecté !");
+		}
+		
+		//try --> catch ?
+		//client.test();
+		
 		final Button btn = (Button)findViewById(R.id.button1);
 		btn.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				/*
-				Intent i = new Intent(MainActivity.this, AnnotationActivity.class);
-				startActivity(i);
-				*/
 				
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 				intent.setType("video/*");
