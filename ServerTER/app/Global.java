@@ -2,8 +2,9 @@
 
 import java.net.UnknownHostException;
 
+import org.cloudfoundry.reconfiguration.play.Bootstrap;
+
 import models.Annotation;
-import models.Fichier;
 import models.Video;
 import play.GlobalSettings;
 import play.Logger;
@@ -22,8 +23,8 @@ public class Global extends GlobalSettings
 		super.beforeStart(arg0);
 		Logger.debug("** onStart **");
 		try {
-			//MorphiaObject.mongo = new Mongo("linus.mongohq.com", 10076);
-			MorphiaObject.mongo = new Mongo("localhost", 27017);
+			MorphiaObject.mongo = new Mongo("linus.mongohq.com", 10076);
+			//MorphiaObject.mongo = new Mongo("localhost", 27017);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,7 +34,6 @@ public class Global extends GlobalSettings
 		
 		MorphiaObject.morphia.map(Annotation.class);
 		MorphiaObject.morphia.map(Video.class);
-		MorphiaObject.morphia.map(Fichier.class);
 
 		/*
 		MorphiaObject.morphia.mapPackageFromClass(Annotation.class);
@@ -42,7 +42,7 @@ public class Global extends GlobalSettings
 		MorphiaObject.morphia.mapPackageFromClass(User.class);
 		MorphiaObject.morphia.mapPackageFromClass(Intervenant.class);
 		*/
-		MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "test");
+		MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "TERannot", "ter", "1234".toCharArray());
 		MorphiaObject.fs = new GridFS(MorphiaObject.datastore.getDB(), "Video");
 		
 		//MorphiaObject.datastore.ensureIndexes();
