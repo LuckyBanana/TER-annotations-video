@@ -62,7 +62,7 @@ public class Videos  extends Controller{
 
 		String result = "";
 		if(form.hasErrors() || form.get().getNom() == null) {
-			return(ok("Error : Must specify name."));
+			return ok("Error : Must specify name.");
 		}
 		else {
 			Key<Video> key = MorphiaObject.datastore.save(form.get());

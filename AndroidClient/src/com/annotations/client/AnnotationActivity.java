@@ -3,7 +3,10 @@ package com.annotations.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import restclient.AnnotationsRESTClientUsage;
+
 import models.Annotation;
+import models.Video;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +20,9 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 public class AnnotationActivity extends Activity {
+	
+	public AnnotationsRESTClientUsage client = new AnnotationsRESTClientUsage(this);
+	public Video video = new Video();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,9 @@ public class AnnotationActivity extends Activity {
 		
 		Intent intent = getIntent();
 		String path = intent.getStringExtra(MainActivity.PATH);
+		String videoId = intent.getStringExtra(MainActivity.ID);
+		
+		video.setId(videoId);
 		
 		final VideoView vid = (VideoView)findViewById(R.id.videoMin);
 		
@@ -107,6 +116,7 @@ public class AnnotationActivity extends Activity {
 				}
 				else {
 					Annotation post = new Annotation(vNom, vCommentaire, vTcdm.concat(vTcds), vTcfm.concat(vTcfs));
+					client.postAnnotation(post, video);
 				}
 			}
 		});

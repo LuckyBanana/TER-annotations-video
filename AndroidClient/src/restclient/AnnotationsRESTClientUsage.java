@@ -13,8 +13,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -33,7 +35,7 @@ public class AnnotationsRESTClientUsage {
 	 * Annotations
 	 */
 	
-	public String listAnnotations() throws Throwable{
+	public String listAnnotations() {
 
 		final CountDownLatch signal = new CountDownLatch(1);
 
@@ -70,7 +72,7 @@ public class AnnotationsRESTClientUsage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		return getRslt();
 
 	}
@@ -195,28 +197,18 @@ public class AnnotationsRESTClientUsage {
 	}
 	
 	public String postVideo(Video v) {
+		
 		final CountDownLatch signal = new CountDownLatch(1);
 		final RequestParams params = new RequestParams();
 		params.put("nom", v.getNom());
-
+		
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				AnnotationsRESTClient.post("api/video", params, new JsonHttpResponseHandler() {
+				AnnotationsRESTClient.post("api/video", params, new AsyncHttpResponseHandler() {
 					@Override
-					public void onSuccess(JSONArray response) {
-						JSONObject firstEvent;
-						String result = "";
-						try {
-							setJsonArray(response);
-							for(int i = 0; i < response.length(); i++){
-								firstEvent = (JSONObject) response.get(0);
-								result += firstEvent.toString();
-							}
-							setRslt(result);
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
+					public void onSuccess(String response) {
+						setRslt(response);						
 					}
 					@Override
 					public void onFinish() {

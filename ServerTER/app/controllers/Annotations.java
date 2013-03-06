@@ -41,7 +41,7 @@ public class Annotations extends Controller{
 		String result = "";
 
 		if(formAnnot.hasErrors() || formAnnot.get().getNom() == null) {
-			return(ok("Error : Must specify name."));
+			return ok("Error : Must specify name.");
 		}
 		else {
 			Key<Annotation> key = MorphiaObject.datastore.save(formAnnot.get());

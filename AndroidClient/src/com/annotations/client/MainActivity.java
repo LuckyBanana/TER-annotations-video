@@ -52,11 +52,12 @@ public class MainActivity extends Activity {
 
 				@Override
 				public void onClick(View v) {
-				
-
+					
+					
 					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 					intent.setType("video/*");
 					startActivityForResult(intent, 1);
+					
 				}
 				 
 			});
@@ -87,12 +88,12 @@ public class MainActivity extends Activity {
 				video.setStream(new File(path));
 				
 				String result = client.postVideo(video);
-				Log.d("Video Post Result", "rslt"+result);
+				Log.d("Video Post Result", result);
 				
 				
 				if(!result.equals("")) {
 					video.setId(result);
-					client.postStream(video.getId(), video.getStream());
+					//client.postStream(video.getId(), video.getStream());
 					String id = result;
 					Intent i = new Intent(MainActivity.this, AnnotationActivity.class);
 					i.putExtra(ID, id);
