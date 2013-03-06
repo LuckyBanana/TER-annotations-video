@@ -8,9 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import tasks.PostVideoDataTask;
-
 import android.os.AsyncTask;
 
 import models.Annotation;
@@ -22,7 +19,7 @@ public class HttpClientAsync {
 	public static void postVideoData(final Video donnees) {
 		
 		String result ="";
-		new PostVideoDataTask().execute(donnees);
+		
 		
 		/*
 		System.out.println("Async start !");

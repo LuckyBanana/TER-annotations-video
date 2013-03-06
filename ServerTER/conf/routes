@@ -6,25 +6,20 @@
 GET     /                           controllers.Application.index()
 
 
-
 OPTIONS /api/*url						controllers.Application.options(url: String)
 
 #Videos
 GET /api/video                          controllers.Videos.list()
-GET /api/video/:id					    controllers.Videos.getVideo(id: String)
-#GET /api/video/:id/annotations		    controllers.Videos.getAnnotationsOnVideo(id: String)
+#GET /api/video/:id					    controllers.Videos.getVideo(id: String)
+GET /api/video/:id/annotations		    controllers.Videos.getAnnotationsOnVideo(id: String)
 POST /api/video						    controllers.Videos.upload()
 POST /api/video/:id				        controllers.Videos.saveBinary(id: String)
-#DELETE /api/video/:id					controllers.Videos.delete(id: String)
-
-#GET /api/video/:nameFile			    controllers.Videos.getVideo(nameFile: String)
-#POST /api/video/:nameFile				controllers.Videos.save(nameFile : String)
-DELETE /api/video/:nameFile				controllers.Videos.delete(nameFile: String)
+DELETE /api/video/:id					controllers.Videos.delete(id: String)
 
 #Annotations
 GET /api/annotation                     controllers.Annotations.list()
-GET /api/annotation/:id					controllers.Annotations.getById(id: String)
-POST /api/annotation                    controllers.Annotations.save()
+#GET /api/annotation/:id				controllers.Annotations.getById(id: String)
+POST /api/annotation/:id                controllers.Annotations.save(id: String)
 DELETE /api/annotation/:id				controllers.Annotations.delete(id: String)
 
 #Users
@@ -32,4 +27,4 @@ DELETE /api/annotation/:id				controllers.Annotations.delete(id: String)
 #POST /api/user               	        controllers.User.createUser()
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /*file               controllers.Assets.at(path="/public", file)
+GET /*file								controllers.Assets.at(path="/public", file)

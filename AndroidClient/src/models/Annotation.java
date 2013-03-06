@@ -1,14 +1,5 @@
 package models;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.annotations.client.AnnotationsRESTClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
 public class Annotation {
 
 	private String id;
@@ -59,32 +50,6 @@ public class Annotation {
 		this.timecodeFin = timecodeFin;
 	}
 	
-	public void post() {
-		RequestParams params = new RequestParams();
-		params.put("nom", getNom());
-		params.put("commentaire", getCommentaire());
-		params.put("timecodeDebut", getTimecodeDebut());
-		params.put("timecodeFin", getTimecodeFin());
-		
-		AnnotationsRESTClient.post("api/annotation", params, new JsonHttpResponseHandler() {
-			 @Override
-	            public void onSuccess(JSONArray response) {
-	                // Pull out the first event on the public timeline
-	                JSONObject firstEvent;
-					try {
-						firstEvent = (JSONObject) response.get(0);
-		                String tweetText = firstEvent.getString("text");
-
-		                // Do something with the response
-		                System.out.println(tweetText);
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-	            }
-		});
-	}
 	
 	
 

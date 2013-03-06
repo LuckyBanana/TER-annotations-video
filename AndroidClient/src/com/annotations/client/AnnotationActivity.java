@@ -28,7 +28,6 @@ public class AnnotationActivity extends Activity {
 		
 		final VideoView vid = (VideoView)findViewById(R.id.videoMin);
 		
-		//vid.setVideoPath("sdcard/video.3gp");
 		vid.setVideoPath(path);
 		
 		MediaController mc = new MediaController(this);

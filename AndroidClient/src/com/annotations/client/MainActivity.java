@@ -1,14 +1,9 @@
 package com.annotations.client;
 
 import java.io.File;
-import java.util.concurrent.CountDownLatch;
 
 import models.Video;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import restclient.AnnotationsRESTClientUsage;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,9 +18,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -33,7 +26,7 @@ public class MainActivity extends Activity {
 	public final static String NAME = "com.annotations.client.NAME";
 	public final static String ID = "com.annotations.client.ID";
 
-	public AnnotationsRESTClientUsage client = new AnnotationsRESTClientUsage();
+	public AnnotationsRESTClientUsage client = new AnnotationsRESTClientUsage(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,27 +47,30 @@ public class MainActivity extends Activity {
 			 * Mode connecté
 			 */
 			System.out.println("Connecté !");
+			
+			btn.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+				
+
+					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+					intent.setType("video/*");
+					startActivityForResult(intent, 1);
+				}
+				 
+			});
 
 		} else {
 			/*
 			 * Mode hors connexion
 			 */
 			System.out.println("Déconnecté !");
+			Toast.makeText(this, "This apps requires an internet connection.", Toast.LENGTH_LONG).show();
 		}
 
 
-		btn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-			
-
-				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-				intent.setType("video/*");
-				startActivityForResult(intent, 1);
-			}
-			 
-		});
+		
 	}
 
 	@Override
@@ -91,18 +87,22 @@ public class MainActivity extends Activity {
 				video.setStream(new File(path));
 				
 				String result = client.postVideo(video);
-				Log.d("Video Post Result", result);
+				Log.d("Video Post Result", "rslt"+result);
 				
 				
-
-				
-				String id = "";
-
-				Intent i = new Intent(MainActivity.this, AnnotationActivity.class);
-				i.putExtra(ID, id);
-				i.putExtra(PATH, path);
-				i.putExtra(NAME, name);
-				startActivity(i);
+				if(!result.equals("")) {
+					video.setId(result);
+					client.postStream(video.getId(), video.getStream());
+					String id = result;
+					Intent i = new Intent(MainActivity.this, AnnotationActivity.class);
+					i.putExtra(ID, id);
+					i.putExtra(PATH, path);
+					i.putExtra(NAME, name);
+					startActivity(i);
+				}
+				else {
+					Toast.makeText(getApplicationContext(), "Error while upload. Please try again.", Toast.LENGTH_LONG).show();
+				}
 				 
 			}
 		}

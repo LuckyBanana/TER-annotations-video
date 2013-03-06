@@ -1,17 +1,7 @@
 package models;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 
 public class Video {
 	
@@ -61,25 +51,6 @@ public class Video {
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-	
-	public String post() {
-		HttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost("url_du_server/api/annotation");
-		
-		String id = "";
-		
-		try {
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-		     nameValuePairs.add(new BasicNameValuePair("name", getNom()));
-		     post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		     HttpResponse response = client.execute(post);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return id;
 	}
 
 	public File getStream() {

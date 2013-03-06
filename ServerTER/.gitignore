@@ -13,3 +13,15 @@ dist
 /.project
 /RUNNING_PID
 /.settings
+<<<<<<< HEAD
+=======
+bin/
+data/
+db/
+dist/
+logs/
+test-result/
+lib/
+tmp/
+modules/
+>>>>>>> 0f947c210db1ef42053508063c4a6e93b3f33f60

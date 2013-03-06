@@ -1,13 +1,12 @@
 package controllers;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-
-import com.google.code.morphia.Key;
-
 import models.Video;
+
+import org.bson.types.ObjectId;
+
 import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
@@ -15,10 +14,17 @@ import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
-import views.html.index;
+
+import com.google.code.morphia.Key;
+import com.google.code.morphia.query.Query;
+import com.google.code.morphia.query.UpdateOperations;
+import com.google.code.morphia.query.UpdateResults;
 
 public class Videos  extends Controller{
 
+	/*
+	 * GET
+	 */
 
 	public static Result list() {
 		List<Video> res = MorphiaObject.datastore.find(Video.class).asList();
@@ -26,73 +32,15 @@ public class Videos  extends Controller{
 	}
 
 	public static Result getAnnotationsOnVideo(String id) {
-
-		return ok();
-	}
-
-	public static Result upload() {
-
-			MultipartFormData body = request().body().asMultipartFormData();
-			DynamicForm df = Form.form().bindFromRequest();
-			FilePart video = body.getFile("stream");
-
-			if (video != null) {
-				String fileName;
-				if(df.hasErrors()) {
-					fileName = video.getFilename();
-				}
-				else {
-					fileName = df.get("nom");
-				}
-
-				File file = video.getFile();
-				String path = "uploads"+File.separator+fileName;
-				file.renameTo(new File(path));
-				file.delete();
-				MorphiaObject.datastore.save(new Video(fileName, path));
-				return ok("File uploaded");
-
-
-			} else {
-				flash("error", "Missing file");
-				return redirect("video");    
-			}
-		
-		
-
-	}
-
-	public static Result uploadS() {
-
-		Form<Video> form = Form.form(Video.class).bindFromRequest();
-
-		String result = "";
-		if(form.hasErrors() || form.get().getNom() == null) {
-			return(ok("Error : Must specify name."));
+		List<Video> res = MorphiaObject.datastore.find(Video.class).asList();
+		for(Video v : res) {
+			if(v.getId().equals(id))
+				return ok(Json.toJson(v.getAnnotations()));
 		}
-		else {
-
-			Key<Video> key = MorphiaObject.datastore.save(form.get());
-			result = key.getId().toString();
-		}
-
-		return ok(result);
-
+		return ok("Error : Unknown Id");
 	}
 
-	public static Result save() throws Exception
-	{
-
-
-		return ok(""+response());
-	}
-
-	public static Result delete(String id) throws Exception
-	{	
-
-		return ok("File DELETE : OK");
-	}
-
+	/*
 	public static Result getVideo(String id) throws Exception
 	{	
 		List<Video> res = MorphiaObject.datastore.find(Video.class).asList();
@@ -102,14 +50,86 @@ public class Videos  extends Controller{
 		File f = new File("oasis.mp4");
 		return ok(index.render("oasis.mp4"));
 	}
+	*/
 
+	/*
+	 * POST
+	 */
 
+	public static Result upload() {
 
+		Form<Video> form = Form.form(Video.class).bindFromRequest();
 
-	public static Result saveBinary(String id/*, File file*/) throws IOException
-	{
+		String result = "";
+		if(form.hasErrors() || form.get().getNom() == null) {
+			return(ok("Error : Must specify name."));
+		}
+		else {
+			Key<Video> key = MorphiaObject.datastore.save(form.get());
+			result = key.getId().toString();
+		}
 
-		return ok();
+		return ok(result);
 	}
+	
+	public static Result saveBinary(String id) {
+
+			MultipartFormData body = request().body().asMultipartFormData();
+			DynamicForm df = Form.form().bindFromRequest();
+			FilePart video = body.getFile("stream");
+			ObjectId oid = new ObjectId(id);
+			
+			UpdateOperations<Video> ops;
+			Query<Video> updateQuery = MorphiaObject.datastore.createQuery(Video.class).field("_id").equal(oid);
+			
+			
+			if(video != null) {
+				File file = video.getFile();
+				String path = "public"+File.separator+"video"+File.separator+video.getFilename();
+				String url = "video/"+video.getFilename();
+				file.renameTo(new File(path));
+				file.delete();
+				ops = MorphiaObject.datastore.createUpdateOperations(Video.class).set("path", url);
+				UpdateResults<Video> ur = MorphiaObject.datastore.update(updateQuery, ops);
+				return ok(ur.getWriteResult().toString());
+			}
+			
+			
+			return ok("Error : File not uploaded.");
+			
+		
+		
+
+	}
+	
+	/*
+	 * if (video != null) {
+				String fileName;
+				if(df.hasErrors()) {
+					fileName = video.getFilename();
+				}
+				else {
+					fileName = df.get("nom");
+				}
+
+				File file = video.getFile();
+				String path = "public"+File.separator+"video"+File.separator+fileName;
+				file.renameTo(new File(path));
+				file.delete();
+				MorphiaObject.datastore.save(new Video(fileName, path));
+				return ok("File uploaded");
+	 */
+
+	
+	/*
+	 * DELETE
+	 */
+
+	public static Result delete(String id) throws Exception
+	{	
+
+		return ok("File DELETE : OK");
+	}
+
 
 }

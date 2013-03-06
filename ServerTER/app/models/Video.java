@@ -17,7 +17,7 @@ public class Video{
 	private ObjectId id;
 	private String nom;
 	private String path;
-	@Embedded
+	
 	private Vector<Annotation> annotations;
 	// private User user;
 	// private Date date;
