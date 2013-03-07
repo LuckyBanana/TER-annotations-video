@@ -7,6 +7,8 @@ import org.bson.types.ObjectId;
 import com.google.code.morphia.Key;
 import com.google.code.morphia.query.Query;
 import com.google.code.morphia.query.UpdateOperations;
+import com.google.code.morphia.query.UpdateResults;
+import com.mongodb.WriteResult;
 
 import models.Annotation;
 import models.Video;
@@ -23,7 +25,7 @@ public class Annotations extends Controller{
 	 * GET
 	 */
 
-	public static Result list() throws Exception {
+	public static Result listAnnotations() throws Exception {
 		List<Annotation> res = MorphiaObject.datastore.find(Annotation.class).asList();
 		return ok(Json.toJson(res));
 	}
@@ -63,8 +65,14 @@ public class Annotations extends Controller{
 	 */
 	
 	public static Result delete(String id) {
-
-		return ok();
+		List<Annotation> res = MorphiaObject.datastore.find(Annotation.class).asList();
+		Annotation ann = new Annotation();
+		for(Annotation a : res) {
+			if(a.getId().toString().equals(id))
+				ann = a;
+		}
+		WriteResult wr = MorphiaObject.datastore.delete(ann);
+		return ok(wr.toString());
 	}
 
 }
