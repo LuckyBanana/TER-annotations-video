@@ -13,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -45,12 +44,13 @@ public class AnnotationsRESTClientUsage {
 				AnnotationsRESTClient.get("api/annotation", null, new JsonHttpResponseHandler() {
 					@Override
 					public void onSuccess(JSONArray response) {
+						setJsonArray(response);
 						JSONObject firstEvent;
 						String result = "";
 						try {
-							setJsonArray(response);
+							
 							for(int i = 0; i < response.length(); i++){
-								firstEvent = (JSONObject) response.get(0);
+								firstEvent = (JSONObject) response.get(i);
 								result += firstEvent.toString();
 							}
 
@@ -61,6 +61,7 @@ public class AnnotationsRESTClientUsage {
 					}
 					@Override
 					public void onFinish() {
+						Toast.makeText(activity, "Chargé !", Toast.LENGTH_SHORT).show();
 						signal.countDown();
 					}
 				});
@@ -84,7 +85,7 @@ public class AnnotationsRESTClientUsage {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				AnnotationsRESTClient.get("api/video/"+id, null, new JsonHttpResponseHandler() {
+				AnnotationsRESTClient.get("api/video/"+id+"/annotations", null, new JsonHttpResponseHandler() {
 					@Override
 					public void onSuccess(JSONArray response) {
 						JSONObject firstObject;
@@ -247,7 +248,6 @@ public class AnnotationsRESTClientUsage {
 				}
 			});
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}			
 

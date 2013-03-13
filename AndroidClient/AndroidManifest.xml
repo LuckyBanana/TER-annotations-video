@@ -3,9 +3,9 @@
     package="com.annotations.client"
     android:versionCode="1"
     android:versionName="1.0" >
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -25,14 +25,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                
             </intent-filter>
         </activity>
         <activity
             android:name="com.annotations.client.AnnotationActivity"
+            android:configChanges="orientation"
             android:label="@string/title_activity_annotation" >
         </activity>
-        <service android:name="VideoUpload"></service>
+
+        <service android:name="com.annotations.client.VideoUpload" >
+        </service>
+
+        <activity
+            android:name="com.annotations.client.AnnotationActivityStreaming"
+            android:label="@string/title_activity_annotation_activity_streaming" >
+        </activity>
+        <activity
+            android:name="com.annotations.client.ListAnnotationActivity"
+            android:label="@string/title_activity_list_annotation" >
+        </activity>
     </application>
 
 </manifest>

@@ -10,16 +10,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="20dp" />
+        />
 
     <TextView
         android:id="@+id/text_nouvelle_annotation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_toRightOf="@+id/videoMin"
+        android:layout_below="@+id/videoMin"
         android:text="@string/text_nouvelle_annotation" />
 
     <EditText
@@ -27,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_nouvelle_annotation"
-        android:layout_toRightOf="@+id/videoMin"
         android:hint="@string/text_nom"
         android:inputType="text" />
 
@@ -36,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textNom"
-        android:layout_toRightOf="@+id/videoMin"
         android:hint="@string/text_commentaire"
         android:inputType="textMultiLine" />
 
@@ -45,7 +41,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textCommentaire"
-        android:layout_toRightOf="@+id/videoMin"
         android:text="@string/bouton_debut_annotation" />
 
     <EditText
@@ -71,7 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bouton_debut_annotation"
-        android:layout_toRightOf="@+id/videoMin"
         android:text="@string/bouton_fin_annotation" />
 
     <EditText
@@ -97,7 +91,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bouton_fin_annotation"
-        android:layout_toRightOf="@+id/videoMin"
         android:text="@string/bouton_valider" />
 
 </RelativeLayout>
