@@ -3,6 +3,7 @@ package controllers;
 import java.io.File;
 import java.util.List;
 
+import models.Annotation;
 import models.Video;
 
 import org.bson.types.ObjectId;
@@ -15,12 +16,39 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 
+import views.html.*;
+
 import com.google.code.morphia.Key;
 import com.google.code.morphia.query.Query;
 import com.google.code.morphia.query.UpdateOperations;
 import com.google.code.morphia.query.UpdateResults;
 
 public class Videos  extends Controller{
+	
+	
+	public static Result streaming(String nameVideo) throws Exception {
+		
+		//ex:http://localhost:9000/api/video/Oasis
+		//on affiche par nom et non par id pour le selectVideo & URL
+		List<Video> myVideos = MorphiaObject.datastore.find(Video.class).asList();
+		Video myVideo = null;
+		List<Annotation> myAnnos = null;
+		for(Video v : myVideos) {
+			if(v.getNom().equals(nameVideo)){
+				myVideo = v;
+				myAnnos = v.getAnnotations();
+				
+			}
+		}
+		
+		String myPath = myVideo.getPath();
+		return ok(streaming.render("/" + myPath, myAnnos, myVideos));
+	}
+
+	
+	
+	
+	
 
 	/*
 	 * GET
@@ -77,7 +105,8 @@ public class Videos  extends Controller{
 			MultipartFormData body = request().body().asMultipartFormData();
 			DynamicForm df = Form.form().bindFromRequest();
 			FilePart video = body.getFile("stream");
-			ObjectId oid = new ObjectId(id);
+			//ObjectId oid = new ObjectId(id);
+			String oid = id;
 			
 			UpdateOperations<Video> ops;
 			Query<Video> updateQuery = MorphiaObject.datastore.createQuery(Video.class).field("_id").equal(oid);
@@ -130,6 +159,8 @@ public class Videos  extends Controller{
 
 		return ok("File DELETE : OK");
 	}
+	
+	
 
 
 }

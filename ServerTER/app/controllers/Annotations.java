@@ -25,7 +25,7 @@ public class Annotations extends Controller{
 	 * GET
 	 */
 
-	public static Result listAnnotations() throws Exception {
+	public static Result list() throws Exception {
 		List<Annotation> res = MorphiaObject.datastore.find(Annotation.class).asList();
 		return ok(Json.toJson(res));
 	}
@@ -55,9 +55,7 @@ public class Annotations extends Controller{
 			MorphiaObject.datastore.update(updateQuery, ops);
 			
 			return ok(result);
-			
 		}
-
 	}
 
 	/*
