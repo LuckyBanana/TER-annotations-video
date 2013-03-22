@@ -6,13 +6,18 @@ import java.util.HashMap;
 
 import models.Video;
 
+import org.bson.types.MinKey;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import dialogs.NameDialog;
+import dialogs.TraitsDialog;
+
 import restclient.AnnotationsRESTClientUsage;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,7 +26,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +40,7 @@ public class MainActivity extends Activity {
 	public final static String PATH = "com.annotations.client.PATH";
 	public final static String NAME = "com.annotations.client.NAME";
 	public final static String ID = "com.annotations.client.ID";
+	private static ProgressDialog progressDialog;
 
 
 	public AnnotationsRESTClientUsage client = new AnnotationsRESTClientUsage(this);
@@ -56,11 +61,12 @@ public class MainActivity extends Activity {
 			/*
 			 * Mode connecté
 			 */
-			 DisplayMetrics metrics = new DisplayMetrics();
-			 getWindowManager().getDefaultDisplay().getMetrics(metrics);
-			 System.out.println(metrics.toString());
-			//listViewInit();
-
+			//TraitsDialog traitsDialog = new TraitsDialog();
+			//traitsDialog.show(getFragmentManager(), "salut");
+			//TraitsDialog.create().show(getFragmentManager(), "cc");
+			listViewInit();
+			//Intent i = new Intent(this, Quadrant2Activity.class);
+			//startActivity(i);
 		} else {
 			/*
 			 * Mode hors connexion
@@ -130,6 +136,10 @@ public class MainActivity extends Activity {
 	}
 
 	public void listViewInit() {
+
+		progressDialog = ProgressDialog.show(MainActivity.this, "", "Loading videos...", true);
+		progressDialog.setCancelable(false);  
+
 		final ListView listView = (ListView)findViewById(R.id.list_main_activity);
 		@SuppressWarnings("unused")
 		String result = client.listVideo();
@@ -139,7 +149,6 @@ public class MainActivity extends Activity {
 
 		for(int i = 0; i < array.length(); i++) {
 			try {
-
 				JSONObject obj = array.getJSONObject(i);
 				map = new HashMap<String, String>();
 				map.put("img", ""+i);
@@ -147,10 +156,9 @@ public class MainActivity extends Activity {
 				JSONObject vId = (JSONObject) obj.get("id");
 				ObjectId videoId = new ObjectId(Integer.parseInt(vId.getString("timeSecond")), Integer.parseInt(vId.getString("machine")), Integer.parseInt(vId.getString("inc")));
 				map.put("id", videoId.toString());
-				
 				map.put("path", obj.getString("path"));
-
-				listItem.add(map);	       
+				listItem.add(map);	      
+				progressDialog.dismiss(); 
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -160,7 +168,7 @@ public class MainActivity extends Activity {
 		SimpleAdapter mSchedule = new SimpleAdapter (this.getBaseContext(), listItem, R.layout.video_item,
 				new String[] {"img", "nom"}, new int[] {R.id.img_list_video, R.id.nom_list_video});
 		listView.setAdapter(mSchedule);
-		
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@SuppressWarnings("unchecked")
@@ -176,5 +184,7 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
+
+
 
 }

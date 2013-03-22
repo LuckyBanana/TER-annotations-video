@@ -22,5 +22,11 @@
     <string name="title_activity_annotation_activity_streaming">Annotations Video</string>
     <string name="list_annotations"></string>
     <string name="title_activity_list_annotation">Annotations Video</string>
+    <string name="title_activity_quadrant">Quadrant</string>
+    <string name="creerQuadrant">Quadrant</string>
+    <string name="valider_quadrant">OK</string>
+    <string name="title_activity_quadrant_v2">QuadrantV2Activity</string>
+    <string name="entrer_traits">Traits</string>
+    <string name="title_activity_traits_dialog">TraitsDialog</string>
 
 </resources>

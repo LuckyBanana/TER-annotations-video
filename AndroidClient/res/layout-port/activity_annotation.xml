@@ -11,20 +11,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         />
+    
+    <SeekBar 
+        android:id="@+id/seek_bar_annotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/videoMin" />
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/text_nouvelle_annotation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_below="@+id/videoMin"
-        android:text="@string/text_nouvelle_annotation" />
+        android:text="@string/text_nouvelle_annotation" />  -->
 
     <EditText
         android:id="@+id/textNom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_nouvelle_annotation"
+        android:layout_below="@+id/seek_bar_annotation"
         android:hint="@string/text_nom"
         android:inputType="text" />
 
@@ -92,5 +99,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bouton_fin_annotation"
         android:text="@string/bouton_valider" />
+    
+    <Button
+            android:id="@+id/creerQuadrant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/validerAnnotation"
+            android:text="@string/creerQuadrant" />
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
-package com.annotations.client;
+package dialogs;
 
-import restclient.AnnotationsRESTClientUsage;
 import models.Video;
+import restclient.AnnotationsRESTClientUsage;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -11,6 +11,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.annotations.client.AnnotationActivity;
+import com.annotations.client.MainActivity;
+import com.annotations.client.R;
 
 
 public class NameDialog extends DialogFragment {

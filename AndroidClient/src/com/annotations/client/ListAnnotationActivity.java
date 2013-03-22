@@ -40,9 +40,8 @@ public class ListAnnotationActivity extends Activity {
 		final ListView listView = (ListView)findViewById(R.id.list_annotation_view);
 		Intent intent = getIntent();
 		String videoId = intent.getStringExtra(MainActivity.ID);
-		System.out.println(videoId);
+		@SuppressWarnings("unused")
 		String result = client.getAnnotationsOnVideo(videoId);
-		System.out.println(result);
 		JSONArray array = client.getJsonArray();
 		ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
 		HashMap<String, String> map;

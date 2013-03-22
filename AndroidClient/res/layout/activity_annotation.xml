@@ -100,4 +100,11 @@
         android:layout_toRightOf="@+id/videoMin"
         android:text="@string/bouton_valider" />
 
+    <Button
+        android:id="@+id/creerQuadrant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/validerAnnotation"
+        android:text="@string/creerQuadrant" />
+
 </RelativeLayout>

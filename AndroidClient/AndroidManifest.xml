@@ -44,6 +44,18 @@
             android:name="com.annotations.client.ListAnnotationActivity"
             android:label="@string/title_activity_list_annotation" >
         </activity>
+        <activity
+            android:name="quadrants.QuadrantActivity"
+            android:label="@string/title_activity_quadrant" >
+        </activity>
+        <activity
+            android:name="quadrants.Quadrant2Activity"
+            android:label="@string/title_activity_quadrant_v2" >
+        </activity>
+        <activity
+            android:name="dialogs.TraitsDialog"
+            android:label="@string/title_activity_traits_dialog" >
+        </activity>
     </application>
 
 </manifest>
