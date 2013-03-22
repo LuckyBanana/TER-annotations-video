@@ -2,9 +2,8 @@
 
 import java.net.UnknownHostException;
 
-import org.cloudfoundry.reconfiguration.play.Bootstrap;
-
 import models.Annotation;
+import models.Quadrant;
 import models.Video;
 import play.GlobalSettings;
 import play.Logger;
@@ -34,6 +33,7 @@ public class Global extends GlobalSettings
 		
 		MorphiaObject.morphia.map(Annotation.class);
 		MorphiaObject.morphia.map(Video.class);
+		MorphiaObject.morphia.map(Quadrant.class);
 
 		/*
 		MorphiaObject.morphia.mapPackageFromClass(Annotation.class);

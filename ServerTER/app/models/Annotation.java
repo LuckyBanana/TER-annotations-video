@@ -17,6 +17,8 @@ public class Annotation {
 	private String commentaire;
 	private String timecodeDebut;
 	private String timecodeFin;
+	
+	private Quadrant quadrant;
 	//private User user;
 	//private Date date;
 	//private Timecode timecode;
@@ -58,13 +60,20 @@ public class Annotation {
 	public void setTimecodeFin(String timecodeFin) {
 		this.timecodeFin = timecodeFin;
 	}
+	public Quadrant getQuadrant() {
+		return quadrant;
+	}
+	public void setQuadrant(Quadrant quadrant) {
+		this.quadrant = quadrant;
+	}
 	
 	public Annotation() {
-		
+		setQuadrant(new Quadrant());
 	}
 	
 	public Annotation(String n) {
 		nom = n;
+		setQuadrant(new Quadrant());
 	}
 	
 	public Annotation(String n, String c, String td, String tf) {
@@ -72,7 +81,9 @@ public class Annotation {
 		commentaire = c;
 		timecodeDebut = td;
 		timecodeFin = tf;
+		setQuadrant(new Quadrant());
 	}
+	
 
 	
 	
