@@ -28,7 +28,7 @@ public final class R {
         public static final int valider_quadrant_icon=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f080019;
+        public static final int action_settings=0x7f08001c;
         public static final int annotation_item_commentaire=0x7f080013;
         public static final int annotation_item_nom=0x7f080010;
         public static final int annotation_item_tcd=0x7f080011;
@@ -38,13 +38,15 @@ public final class R {
         public static final int bouton_fin_annotation=0x7f080007;
         public static final int change_video_name=0x7f080014;
         public static final int creerQuadrant=0x7f08000b;
-        public static final int entrer_traits=0x7f08001d;
-        public static final int img_list_video=0x7f080017;
+        public static final int entrer_traits=0x7f080020;
+        public static final int imagination_name=0x7f080018;
+        public static final int imagination_rating=0x7f080019;
+        public static final int img_list_video=0x7f08001a;
         public static final int list_annotation_view=0x7f08000d;
-        public static final int list_annotations=0x7f08001a;
+        public static final int list_annotations=0x7f08001d;
         public static final int list_main_activity=0x7f08000e;
-        public static final int nom_list_video=0x7f080018;
-        public static final int nouvelle_video=0x7f08001b;
+        public static final int nom_list_video=0x7f08001b;
+        public static final int nouvelle_video=0x7f08001e;
         public static final int seek_bar_annotation=0x7f08000c;
         public static final int textCommentaire=0x7f080003;
         public static final int textNom=0x7f080002;
@@ -54,10 +56,11 @@ public final class R {
         public static final int timecodeFinMin=0x7f080008;
         public static final int timecodeFinSec=0x7f080009;
         public static final int trait_name=0x7f080015;
-        public static final int traits_list=0x7f080016;
         public static final int validerAnnotation=0x7f08000a;
-        public static final int valider_quadrant=0x7f08001c;
+        public static final int valider_quadrant=0x7f08001f;
         public static final int videoMin=0x7f080000;
+        public static final int volonte_name=0x7f080016;
+        public static final int volonte_rating=0x7f080017;
     }
     public static final class layout {
         public static final int activity_annotation=0x7f030000;

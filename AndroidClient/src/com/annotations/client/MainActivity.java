@@ -61,12 +61,9 @@ public class MainActivity extends Activity {
 			/*
 			 * Mode connecté
 			 */
-			//TraitsDialog traitsDialog = new TraitsDialog();
-			//traitsDialog.show(getFragmentManager(), "salut");
-			//TraitsDialog.create().show(getFragmentManager(), "cc");
-			listViewInit();
-			//Intent i = new Intent(this, Quadrant2Activity.class);
-			//startActivity(i);
+			TraitsDialog traitsDialog = new TraitsDialog();
+			traitsDialog.show(getFragmentManager(), "salut");
+			//listViewInit();
 		} else {
 			/*
 			 * Mode hors connexion

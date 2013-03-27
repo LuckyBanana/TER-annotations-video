@@ -3,10 +3,36 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/traits_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </ListView>
+    <TextView
+        android:id="@+id/volonte_name"
+        android:text="Volonte"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textIsSelectable="false" />
+     <SeekBar
+        android:id="@+id/volonte_rating"
+        android:max="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp" />
+
+    <TextView
+        android:id="@+id/imagination_name"
+        android:text="Imagination"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textIsSelectable="false"
+        android:layout_below="@id/volonte_rating" />
+
+    <SeekBar
+        android:id="@+id/imagination_rating"
+        android:max="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/imagination_name"
+        android:layout_marginTop="28dp" />
 
 </RelativeLayout>

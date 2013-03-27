@@ -76,12 +76,12 @@ public class Annotation {
 		setQuadrant(new Quadrant());
 	}
 	
-	public Annotation(String n, String c, String td, String tf) {
+	public Annotation(String n, String c, String td, String tf, Quadrant q) {
 		nom = n;
 		commentaire = c;
 		timecodeDebut = td;
 		timecodeFin = tf;
-		setQuadrant(new Quadrant());
+		setQuadrant(q);
 	}
 	
 
