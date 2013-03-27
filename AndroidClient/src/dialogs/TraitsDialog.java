@@ -19,6 +19,9 @@ public class TraitsDialog extends DialogFragment {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		
 		
+		
+		
+		
 		builder.setView(inflater.inflate(R.layout.traits_dialog, null))
 		.setMessage("Traits")
 		.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
