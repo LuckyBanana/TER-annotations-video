@@ -132,6 +132,9 @@ public class AnnotationsRESTClientUsage {
 		params.put("perception", a.getQuadrant().getTraits().get("perception"));
 		params.put("memoire", a.getQuadrant().getTraits().get("memoire"));
 		params.put("entrainement", a.getQuadrant().getTraits().get("entrainement"));
+		
+		System.out.println(a.getQuadrant().getTraits().get("volonte")+" "+
+				a.getQuadrant().getTraits().get("imagination"));
 
 		AnnotationsRESTClient.post("api/annotation/"+v.getId(), params, new JsonHttpResponseHandler() {
 			@Override

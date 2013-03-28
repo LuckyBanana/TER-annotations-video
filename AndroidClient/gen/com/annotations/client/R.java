@@ -114,9 +114,13 @@ public final class R {
         public static final int bouton_valider=0x7f05000b;
         public static final int chooser_title=0x7f05000f;
         public static final int creerQuadrant=0x7f050016;
+        public static final int entrainement=0x7f050021;
         public static final int entrer_traits=0x7f050019;
         public static final int hello_world=0x7f050002;
+        public static final int imagination=0x7f05001e;
         public static final int list_annotations=0x7f050013;
+        public static final int memoire=0x7f050020;
+        public static final int perception=0x7f05001f;
         public static final int text_commentaire=0x7f050005;
         public static final int text_index=0x7f050010;
         public static final int text_nom=0x7f050004;
@@ -133,6 +137,7 @@ public final class R {
         public static final int title_activity_traits_dialog=0x7f05001a;
         public static final int valider_quadrant=0x7f050017;
         public static final int valider_traits=0x7f05001b;
+        public static final int volonte=0x7f05001d;
     }
     public static final class style {
         /** 

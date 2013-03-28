@@ -101,11 +101,11 @@ public class AnnotationActivityStreaming extends Activity {
 		if(requestCode == 2) {
 			if(resultCode == RESULT_OK) {
 				Map<String, String> values = new HashMap<String, String>();
-				values.put("volonte", QuadrantActivity.VOLONTE);
-				values.put("imagination", QuadrantActivity.IMAGINATION);
-				values.put("perception", QuadrantActivity.PERCEPTION);
-				values.put("memoire", QuadrantActivity.MEMOIRE);
-				values.put("entrainement", QuadrantActivity.ENTRAINEMENT);
+				values.put("volonte", data.getStringExtra(QuadrantActivity.VOLONTE));
+				values.put("imagination", data.getStringExtra(QuadrantActivity.IMAGINATION));
+				values.put("perception", data.getStringExtra(QuadrantActivity.PERCEPTION));
+				values.put("memoire", data.getStringExtra(QuadrantActivity.MEMOIRE));
+				values.put("entrainement", data.getStringExtra(QuadrantActivity.ENTRAINEMENT));
 				quadrant = new Quadrant(
 						Integer.parseInt(data.getStringExtra(QuadrantActivity.X)),
 						Integer.parseInt(data.getStringExtra(QuadrantActivity.Y)),

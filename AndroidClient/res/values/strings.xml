@@ -30,5 +30,9 @@
     <string name="title_activity_traits_dialog">TraitsDialog</string>
     <string name="valider_traits">Valider</string>
     <string name="annuler_traits">Annuler</string>
-
+    <string name="volonte">Volonte </string>
+    <string name="imagination">Imagination </string>
+    <string name="perception">Perception </string>
+	<string name="memoire">Memoire </string>
+	<string name="entrainement">Entrainement </string>
 </resources>

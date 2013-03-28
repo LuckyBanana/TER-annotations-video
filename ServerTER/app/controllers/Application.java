@@ -9,7 +9,7 @@ public class Application extends Controller  {
 
 	public static Result index() throws Exception {
 
-		return ok("<h1>SALUT</h1>").as("text/html");
+		return ok("<h1>QUADRANT</h1>").as("text/html");
 	}
 
 
