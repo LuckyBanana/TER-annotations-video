@@ -3,6 +3,7 @@ package com.annotations.client;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import models.Video;
 
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 
 import dialogs.NameDialog;
 import dialogs.TraitsDialog;
+import dialogs.TraitsDialog.OnTraitsDialogResult;
 
 import restclient.AnnotationsRESTClientUsage;
 import android.app.Activity;
@@ -61,9 +63,8 @@ public class MainActivity extends Activity {
 			/*
 			 * Mode connecté
 			 */
-			TraitsDialog traitsDialog = new TraitsDialog();
-			traitsDialog.show(getFragmentManager(), "salut");
-			//listViewInit();
+			
+			listViewInit();
 		} else {
 			/*
 			 * Mode hors connexion

@@ -9,15 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.bson.types.ObjectId;
 
-import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.NotSaved;
 
+@Embedded
 public class Quadrant {
 
-	@Id
-	ObjectId id = new ObjectId();
 	private Map<String, Integer> map = new HashMap<String, Integer>();
 
 	/*
@@ -34,25 +32,33 @@ public class Quadrant {
 		initCouleurs();
 	}
 	
+	public Quadrant(int v, int i, int p, int m, int e) {
+		map.put("volonte", v);
+		map.put("imagination", i);
+		map.put("perception", p);
+		map.put("memoire", m);
+		map.put("entrainement", e);
+	}
+	
 	public void initCouleurs() {
-		codeCouleur.put("Volonte", Color.red);
-		codeCouleur.put("Imagination", Color.yellow);
-		codeCouleur.put("Perception", Color.gray);
-		codeCouleur.put("Memoire", Color.green);
-		codeCouleur.put("Entrainement", Color.blue);
+		codeCouleur.put("volonte", Color.red);
+		codeCouleur.put("imagination", Color.yellow);
+		codeCouleur.put("perception", Color.gray);
+		codeCouleur.put("memoire", Color.green);
+		codeCouleur.put("entrainement", Color.blue);
 	}
 	
 	public void test(List<Quadrant> quadrants) {
 		for(int i = 0; i < 15; i++) {
 			Quadrant map = new Quadrant();
 			Random r = new Random();
-			map.getMap().put("X", r.nextInt(1200));
-			map.getMap().put("Y", r.nextInt(800));
-			map.getMap().put("Volonte", r.nextInt(10));
-			map.getMap().put("Imagination", r.nextInt(10));
-			map.getMap().put("Perception", r.nextInt(10));
-			map.getMap().put("Memoire", r.nextInt(10));
-			map.getMap().put("Entrainement", r.nextInt(10));
+			map.getMap().put("x", r.nextInt(1200));
+			map.getMap().put("y", r.nextInt(800));
+			map.getMap().put("volonte", r.nextInt(10));
+			map.getMap().put("imagination", r.nextInt(10));
+			map.getMap().put("perception", r.nextInt(10));
+			map.getMap().put("memoire", r.nextInt(10));
+			map.getMap().put("entrainement", r.nextInt(10));
 			quadrants.add(map);
 		}
 	}
@@ -78,25 +84,25 @@ public class Quadrant {
 		int max = 0;
 		String code = "";
 		for(Quadrant map : quadrants) {
-			if(map.getMap().get("X") == x) {
-				if(map.getMap().get("Y") == y) {
-					max = map.getMap().get("Volonte");
-					code = "Volonte";
-					if(map.getMap().get("Imagination") > max) {
-						max = map.getMap().get("Imagination");
-						code = "Imagination";
+			if(map.getMap().get("x") == x) {
+				if(map.getMap().get("y") == y) {
+					max = map.getMap().get("volonte");
+					code = "volonte";
+					if(map.getMap().get("imagination") > max) {
+						max = map.getMap().get("imagination");
+						code = "imagination";
 					}
-					if(map.getMap().get("Perception") > max) {
-						max = map.getMap().get("Perception");
-						code = "Perception";
+					if(map.getMap().get("perception") > max) {
+						max = map.getMap().get("perception");
+						code = "perception";
 					}
-					if(map.getMap().get("Memoire") > max) {
-						max = map.getMap().get("Memoire");
-						code = "Memoire";
+					if(map.getMap().get("memoire") > max) {
+						max = map.getMap().get("memoire");
+						code = "memoire";
 					}
-					if(map.getMap().get("Entrainement") > max) {
-						max = map.getMap().get("Entrainement");
-						code = "Entrainement";
+					if(map.getMap().get("entrainement") > max) {
+						max = map.getMap().get("entrainement");
+						code = "entrainement";
 					}
 				}
 			}

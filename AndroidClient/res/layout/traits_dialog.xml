@@ -1,38 +1,174 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/traits_dialog_root"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/volonte_name"
-        android:text="Volonte"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textIsSelectable="false" />
-     <SeekBar
-        android:id="@+id/volonte_rating"
-        android:max="10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp" />
+    <RelativeLayout
+        android:id="@+id/volonte_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/imagination_name"
-        android:text="Imagination"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textIsSelectable="false"
-        android:layout_below="@id/volonte_rating" />
+        <TextView
+            android:id="@+id/volonte_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volonte "
+            android:textIsSelectable="false" />
 
-    <SeekBar
-        android:id="@+id/imagination_rating"
-        android:max="10"
-        android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/volonte_int"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/volonte_name"
+            android:textIsSelectable="false" />
+
+        <SeekBar
+            android:id="@+id/volonte_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="28dp"
+            android:max="10" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/imagination_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/imagination_name"
-        android:layout_marginTop="28dp" />
+        android:layout_below="@id/volonte_layout" >
+
+        <TextView
+            android:id="@+id/imagination_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Imagination "
+            android:textIsSelectable="false" />
+
+        <TextView
+            android:id="@+id/imagination_int"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imagination_name"
+            android:textIsSelectable="false" />
+
+        <SeekBar
+            android:id="@+id/imagination_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/imagination_name"
+            android:layout_marginTop="28dp"
+            android:max="10" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/perception_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagination_layout" >
+
+        <TextView
+            android:id="@+id/perception_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perception "
+            android:textIsSelectable="false" />
+
+        <TextView
+            android:id="@+id/perception_int"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/perception_name"
+            android:textIsSelectable="false" />
+
+        <SeekBar
+            android:id="@+id/perception_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/perception_name"
+            android:layout_marginTop="28dp"
+            android:max="10" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/memoire_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/perception_layout" >
+
+        <TextView
+            android:id="@+id/memoire_name"
+            android:text="Memoire "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="false" />
+
+        <TextView
+            android:id="@+id/memoire_int"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/memoire_name"
+            android:textIsSelectable="false" />
+
+        <SeekBar
+            android:id="@+id/memoire_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/memoire_name"
+            android:layout_marginTop="28dp"
+            android:max="10" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/entrainement_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/memoire_layout" >
+
+        <TextView
+            android:id="@+id/entrainement_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entrainement "
+            android:textIsSelectable="false" />
+
+        <TextView
+            android:id="@+id/entrainement_int"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/entrainement_name"
+            android:textIsSelectable="false" />
+
+        <SeekBar
+            android:id="@+id/entrainement_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/entrainement_name"
+            android:layout_marginTop="28dp"
+            android:max="10" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/entrainement_layout" >
+
+        <Button 
+            android:id="@+id/valider_traits"
+            android:text="@string/valider_traits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button 
+            android:id="@+id/annuler_traits"
+            android:text="@string/annuler_traits"
+            android:layout_toRightOf="@id/valider_traits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -127,6 +127,11 @@ public class AnnotationsRESTClientUsage {
 		params.put("commentaire", a.getCommentaire());
 		params.put("timecodeDebut", a.getTimecodeDebut());
 		params.put("timecodeFin", a.getTimecodeFin());
+		params.put("volonte", a.getQuadrant().getTraits().get("volonte"));
+		params.put("imagination", a.getQuadrant().getTraits().get("imagination"));
+		params.put("perception", a.getQuadrant().getTraits().get("perception"));
+		params.put("memoire", a.getQuadrant().getTraits().get("memoire"));
+		params.put("entrainement", a.getQuadrant().getTraits().get("entrainement"));
 
 		AnnotationsRESTClient.post("api/annotation/"+v.getId(), params, new JsonHttpResponseHandler() {
 			@Override

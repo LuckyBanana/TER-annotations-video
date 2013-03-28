@@ -28,5 +28,7 @@
     <string name="title_activity_quadrant_v2">QuadrantV2Activity</string>
     <string name="entrer_traits">Traits</string>
     <string name="title_activity_traits_dialog">TraitsDialog</string>
+    <string name="valider_traits">Valider</string>
+    <string name="annuler_traits">Annuler</string>
 
 </resources>

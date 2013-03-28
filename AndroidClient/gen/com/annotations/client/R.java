@@ -28,25 +28,40 @@ public final class R {
         public static final int valider_quadrant_icon=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f08001c;
+        public static final int action_settings=0x7f08002f;
         public static final int annotation_item_commentaire=0x7f080013;
         public static final int annotation_item_nom=0x7f080010;
         public static final int annotation_item_tcd=0x7f080011;
         public static final int annotation_item_tcf=0x7f080012;
+        public static final int annuler_traits=0x7f08002c;
         public static final int basic_quadrant=0x7f08000f;
         public static final int bouton_debut_annotation=0x7f080004;
         public static final int bouton_fin_annotation=0x7f080007;
         public static final int change_video_name=0x7f080014;
         public static final int creerQuadrant=0x7f08000b;
-        public static final int entrer_traits=0x7f080020;
-        public static final int imagination_name=0x7f080018;
-        public static final int imagination_rating=0x7f080019;
-        public static final int img_list_video=0x7f08001a;
+        public static final int entrainement_int=0x7f080029;
+        public static final int entrainement_layout=0x7f080027;
+        public static final int entrainement_name=0x7f080028;
+        public static final int entrainement_rating=0x7f08002a;
+        public static final int entrer_traits=0x7f080033;
+        public static final int imagination_int=0x7f08001d;
+        public static final int imagination_layout=0x7f08001b;
+        public static final int imagination_name=0x7f08001c;
+        public static final int imagination_rating=0x7f08001e;
+        public static final int img_list_video=0x7f08002d;
         public static final int list_annotation_view=0x7f08000d;
-        public static final int list_annotations=0x7f08001d;
+        public static final int list_annotations=0x7f080030;
         public static final int list_main_activity=0x7f08000e;
-        public static final int nom_list_video=0x7f08001b;
-        public static final int nouvelle_video=0x7f08001e;
+        public static final int memoire_int=0x7f080025;
+        public static final int memoire_layout=0x7f080023;
+        public static final int memoire_name=0x7f080024;
+        public static final int memoire_rating=0x7f080026;
+        public static final int nom_list_video=0x7f08002e;
+        public static final int nouvelle_video=0x7f080031;
+        public static final int perception_int=0x7f080021;
+        public static final int perception_layout=0x7f08001f;
+        public static final int perception_name=0x7f080020;
+        public static final int perception_rating=0x7f080022;
         public static final int seek_bar_annotation=0x7f08000c;
         public static final int textCommentaire=0x7f080003;
         public static final int textNom=0x7f080002;
@@ -56,11 +71,15 @@ public final class R {
         public static final int timecodeFinMin=0x7f080008;
         public static final int timecodeFinSec=0x7f080009;
         public static final int trait_name=0x7f080015;
+        public static final int traits_dialog_root=0x7f080016;
         public static final int validerAnnotation=0x7f08000a;
-        public static final int valider_quadrant=0x7f08001f;
+        public static final int valider_quadrant=0x7f080032;
+        public static final int valider_traits=0x7f08002b;
         public static final int videoMin=0x7f080000;
-        public static final int volonte_name=0x7f080016;
-        public static final int volonte_rating=0x7f080017;
+        public static final int volonte_int=0x7f080019;
+        public static final int volonte_layout=0x7f080017;
+        public static final int volonte_name=0x7f080018;
+        public static final int volonte_rating=0x7f08001a;
     }
     public static final class layout {
         public static final int activity_annotation=0x7f030000;
@@ -88,6 +107,7 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int ajouter=0x7f050003;
         public static final int ajouter_video=0x7f050011;
+        public static final int annuler_traits=0x7f05001c;
         public static final int app_name=0x7f050000;
         public static final int bouton_debut_annotation=0x7f05000d;
         public static final int bouton_fin_annotation=0x7f05000e;
@@ -112,6 +132,7 @@ public final class R {
         public static final int title_activity_quadrant_v2=0x7f050018;
         public static final int title_activity_traits_dialog=0x7f05001a;
         public static final int valider_quadrant=0x7f050017;
+        public static final int valider_traits=0x7f05001b;
     }
     public static final class style {
         /** 

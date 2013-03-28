@@ -3,6 +3,7 @@ package models;
 
 import org.bson.types.ObjectId;
 
+import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 
@@ -18,6 +19,7 @@ public class Annotation {
 	private String timecodeDebut;
 	private String timecodeFin;
 	
+	@Embedded
 	private Quadrant quadrant;
 	//private User user;
 	//private Date date;

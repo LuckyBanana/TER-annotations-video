@@ -111,8 +111,8 @@ public class Video{
 
 		Map<Point, Float> trans = new HashMap<Point, Float>();
 		for(Quadrant quadrant : quadrants) {
-			float x = quadrant.getMap().get("X");
-			float y = quadrant.getMap().get("Y");
+			float x = quadrant.getMap().get("x");
+			float y = quadrant.getMap().get("y");
 			g.setColor(Quadrant.quelleDominante((int) x, (int)y, quadrants));
 
 			g.fillOval((int) x, (int) y, 20, 20);

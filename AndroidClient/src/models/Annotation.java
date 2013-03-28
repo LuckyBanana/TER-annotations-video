@@ -7,6 +7,7 @@ public class Annotation {
 	private String commentaire;
 	private String timecodeDebut;
 	private String timecodeFin;
+	private Quadrant quadrant;
 	
 	public Annotation() {
 		
@@ -17,6 +18,11 @@ public class Annotation {
 		setCommentaire(c);
 		setTimecodeDebut(td);
 		setTimecodeFin(tf);
+	}
+	
+	public Annotation(String n, String c, String td, String tf, Quadrant q) {
+		this(n, c, td, tf);
+		setQuadrant(q);
 	}
 	
 	public String getId() {
@@ -48,6 +54,12 @@ public class Annotation {
 	}
 	public void setTimecodeFin(String timecodeFin) {
 		this.timecodeFin = timecodeFin;
+	}
+	public Quadrant getQuadrant() {
+		return quadrant;
+	}
+	public void setQuadrant(Quadrant quadrant) {
+		this.quadrant = quadrant;
 	}
 	
 	

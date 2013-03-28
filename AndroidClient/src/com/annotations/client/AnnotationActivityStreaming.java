@@ -4,8 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import models.Annotation;
+import models.Quadrant;
 import models.Video;
 
 import org.json.JSONArray;
@@ -47,6 +49,7 @@ public class AnnotationActivityStreaming extends Activity {
 	private Video video = new Video();
 	private VideoView vid;
 	private static ProgressDialog progressDialog;
+	private Quadrant quadrant = new Quadrant();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,19 +94,26 @@ public class AnnotationActivityStreaming extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
-	
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == 2) {
 			if(resultCode == RESULT_OK) {
-				String x = data.getStringExtra(QuadrantActivity.X);
-				String y = data.getStringExtra(QuadrantActivity.Y);
-				System.out.println("rtn : "+x+" "+y);
+				Map<String, String> values = new HashMap<String, String>();
+				values.put("volonte", QuadrantActivity.VOLONTE);
+				values.put("imagination", QuadrantActivity.IMAGINATION);
+				values.put("perception", QuadrantActivity.PERCEPTION);
+				values.put("memoire", QuadrantActivity.MEMOIRE);
+				values.put("entrainement", QuadrantActivity.ENTRAINEMENT);
+				quadrant = new Quadrant(
+						Integer.parseInt(data.getStringExtra(QuadrantActivity.X)),
+						Integer.parseInt(data.getStringExtra(QuadrantActivity.Y)),
+						values);
 			}
 		}
 	}
-	
+
 
 	/*
 	 * Retourne une liste contenant deux chaines
@@ -205,12 +215,25 @@ public class AnnotationActivityStreaming extends Activity {
 				if(vNom.equals("") || vCommentaire.equals("") 
 						|| vTcds.equals("") || vTcdm.equals("") 
 						|| vTcfs.equals("") || vTcfm.equals("")) {
-					Toast.makeText(AnnotationActivityStreaming.this, "All Fields Required.", 
+					Toast.makeText(AnnotationActivityStreaming.this, "Vous devez remplir tous les champs.", 
 							Toast.LENGTH_SHORT).show();
 				}
 				else {
-					Annotation post = new Annotation(vNom, vCommentaire, vTcdm.concat(vTcds), vTcfm.concat(vTcfs));
+					Toast.makeText(AnnotationActivityStreaming.this, "Post en cours.", 
+							Toast.LENGTH_SHORT).show();
+					Annotation post = new Annotation(vNom, vCommentaire, vTcdm.concat(vTcds), vTcfm.concat(vTcfs), quadrant);
 					client.postAnnotation(post, video);
+
+					/*
+					 * Vider les champs
+					 */
+
+					nom_field.setText("");
+					commentaire_field.setText("");
+					tcd_s.setText(""); 
+					tcd_m.setText("");
+					tcf_s.setText("");
+					tcf_m.setText("");
 				}
 			}
 		});
@@ -225,8 +248,8 @@ public class AnnotationActivityStreaming extends Activity {
 			}
 		});
 	}
-	
-	
+
+
 	/*
 	 * INIT
 	 */
