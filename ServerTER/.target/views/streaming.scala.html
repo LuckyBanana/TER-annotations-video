@@ -21,39 +21,31 @@
 			 		$("#selectVideo").select2();
 					$("#selectVideo").on("change", function(e){ 
 					
-						//1try:pb de refresh sur les annos
-					//	$("#myStream").attr('src', "/video/oasis.mp4");
-					//	$("#myStream").load();
-					//	$("#myStream").play();
-					
-						var myVideoSelected =  jQuery(this).val();
+							//1try:pb de refresh sur les annos
+						//	$("#myStream").attr('src', "/video/oasis.mp4");
+						//	$("#myStream").load();
+						//	$("#myStream").play();
+						var myVideoSelected =  $(this).val();
 						$(location).attr("href", myVideoSelected);
-		
+					});
+					
+					$("#myStream").bind("timeupdate", function() {
+						alert(path);
 						
+			        	if (this.currentTime > 2) {
+			            	// alert("lol");
+			        	}
 					});
 		
 			 	});
-			 	
-//				var video = document.getElementsByTagName('#myStream')[0];
-//				 $(function () {
-//					$("#myStream").bind("timeupdate", function() {
-//				        if (this.currentTime >= 2) {
-//				             alert("lol");
-//				         }
-//					});
-//				});
-				 
 
-				 
-
-				    
-			</script>
+			 </script>
 			
         <div class="stream">
 			<video id="myStream" src=@path type="video/mp4" controls="controls"></video>
 			<select id="selectAnnotation" class="annotations">
 			         @for(anno <- annos) { 
-			         	<option value=@anno.getNom>@anno.getNom</option>
+			         	<option value=@anno.getNom >@anno.getNom</option>
 			         }
 			</select>    
 
