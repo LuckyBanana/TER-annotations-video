@@ -10,7 +10,6 @@ import play.Logger;
 
 import com.google.code.morphia.Morphia;
 import com.mongodb.Mongo;
-import com.mongodb.gridfs.GridFS;
 
 import controllers.MorphiaObject;
 
@@ -43,11 +42,13 @@ public class Global extends GlobalSettings
 		MorphiaObject.morphia.mapPackageFromClass(Intervenant.class);
 		*/
 		
-		//MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "TERannot", "ter", "1234".toCharArray());
+		MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "TERannot", "ter", "1234".toCharArray());
+		//MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "TERannot");
+
 		//MorphiaObject.fs = new GridFS(MorphiaObject.datastore.getDB(), "Video");
 		//MorphiaObject.datastore.ensureCaps();
 		
-		//MorphiaObject.datastore.ensureIndexes();
+		MorphiaObject.datastore.ensureIndexes();
 		
 
 

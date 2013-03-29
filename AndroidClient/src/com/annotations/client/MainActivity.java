@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 			 * Mode connecté
 			 */
 			
-			listViewInit();
+			//listViewInit();
 		} else {
 			/*
 			 * Mode hors connexion

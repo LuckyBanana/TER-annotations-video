@@ -94,7 +94,8 @@ public class Videos  extends Controller{
 	public static Result upload() {
 
 		Form<Video> form = Form.form(Video.class).bindFromRequest();
-
+		DynamicForm df = Form.form().bindFromRequest();
+		
 		String result = "";
 		if(form.hasErrors() || form.get().getNom() == null) {
 			return ok("Error : Must specify name.");
@@ -110,7 +111,7 @@ public class Videos  extends Controller{
 	public static Result saveBinary(String id) {
 
 		MultipartFormData body = request().body().asMultipartFormData();
-		DynamicForm df = Form.form().bindFromRequest();
+		
 		FilePart video = body.getFile("stream");
 		//ObjectId oid = new ObjectId(id);
 		String oid = id;

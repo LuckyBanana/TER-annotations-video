@@ -10,7 +10,7 @@ OPTIONS /api/*url						controllers.Application.options(url: String)
 
 #Videos
 GET /api/video                          controllers.Videos.list()
-GET /api/video/:nameVideo						controllers.Videos.streaming(nameVideo: String)
+GET /api/video/:nameVideo				controllers.Videos.streaming(nameVideo: String)
 GET /api/video/:id/annotations		    controllers.Videos.getAnnotationsOnVideo(id: String)
 POST /api/video						    controllers.Videos.upload()
 POST /api/video/:id				        controllers.Videos.saveBinary(id: String)
