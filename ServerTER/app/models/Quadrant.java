@@ -32,7 +32,9 @@ public class Quadrant {
 		initCouleurs();
 	}
 	
-	public Quadrant(int v, int i, int p, int m, int e) {
+	public Quadrant(int x, int y, int v, int i, int p, int m, int e) {
+		map.put("x", x);
+		map.put("y", y);
 		map.put("volonte", v);
 		map.put("imagination", i);
 		map.put("perception", p);

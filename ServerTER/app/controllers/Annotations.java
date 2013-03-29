@@ -48,17 +48,30 @@ public class Annotations extends Controller{
 			return ok("Error : Must specify name.");
 		}
 		else {
-			Annotation post = new Annotation(
-					requestData.get("nom"),
-					requestData.get("commentaire"), 
-					requestData.get("timecodeDebut"), 
-					requestData.get("timecodeFin"), 
-					new Quadrant(
-							Integer.parseInt(requestData.get("volonte")),
-							Integer.parseInt(requestData.get("imagination")),
-							Integer.parseInt(requestData.get("perception")),
-							Integer.parseInt(requestData.get("memoire")),
-							Integer.parseInt(requestData.get("entrainement"))));
+			Annotation post;
+			try {
+				post = new Annotation(
+						requestData.get("nom"),
+						requestData.get("commentaire"), 
+						requestData.get("timecodeDebut"), 
+						requestData.get("timecodeFin"), 
+						new Quadrant(
+								Integer.parseInt(requestData.get("x")),
+								Integer.parseInt(requestData.get("y")),
+								Integer.parseInt(requestData.get("volonte")),
+								Integer.parseInt(requestData.get("imagination")),
+								Integer.parseInt(requestData.get("perception")),
+								Integer.parseInt(requestData.get("memoire")),
+								Integer.parseInt(requestData.get("entrainement"))));
+			}
+			catch (NumberFormatException nfe) {
+				post = new Annotation(
+						requestData.get("nom"),
+						requestData.get("commentaire"), 
+						requestData.get("timecodeDebut"), 
+						requestData.get("timecodeFin"));
+			}
+			
 			Key<Annotation> key = MorphiaObject.datastore.save(post);
 			result = key.getId().toString();
 

@@ -107,9 +107,10 @@ public class AnnotationActivityStreaming extends Activity {
 				values.put("memoire", data.getStringExtra(QuadrantActivity.MEMOIRE));
 				values.put("entrainement", data.getStringExtra(QuadrantActivity.ENTRAINEMENT));
 				quadrant = new Quadrant(
-						Integer.parseInt(data.getStringExtra(QuadrantActivity.X)),
-						Integer.parseInt(data.getStringExtra(QuadrantActivity.Y)),
+						data.getStringExtra(QuadrantActivity.X),
+						data.getStringExtra(QuadrantActivity.Y),
 						values);
+				System.out.println(quadrant.afficher());
 			}
 		}
 	}
@@ -221,6 +222,7 @@ public class AnnotationActivityStreaming extends Activity {
 				else {
 					Toast.makeText(AnnotationActivityStreaming.this, "Post en cours.", 
 							Toast.LENGTH_SHORT).show();
+					System.out.println("final"+quadrant.afficher());
 					Annotation post = new Annotation(vNom, vCommentaire, vTcdm.concat(vTcds), vTcfm.concat(vTcfs), quadrant);
 					client.postAnnotation(post, video);
 

@@ -13,12 +13,12 @@ import android.os.AsyncTask;
 import models.Annotation;
 import models.Video;
 
-
+@SuppressWarnings("rawtypes")
 public class HttpClientAsync {
 
 	public static void postVideoData(final Video donnees) {
 		
-		String result ="";
+		//String result ="";
 		
 		
 		/*

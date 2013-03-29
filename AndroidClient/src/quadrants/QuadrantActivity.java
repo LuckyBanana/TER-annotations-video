@@ -6,7 +6,6 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,7 +49,7 @@ public class QuadrantActivity extends Activity {
 			Intent i = new Intent();
 			i.putExtra(QuadrantActivity.X, qv.points.get(0).x+"");
 			i.putExtra(QuadrantActivity.Y, qv.points.get(0).y+"");
-			i.putExtra(QuadrantActivity.VOLONTE, values.get("vonlonte"));
+			i.putExtra(QuadrantActivity.VOLONTE, values.get("volonte"));
 			i.putExtra(QuadrantActivity.IMAGINATION, values.get("imagination"));
 			i.putExtra(QuadrantActivity.PERCEPTION, values.get("perception"));
 			i.putExtra(QuadrantActivity.MEMOIRE, values.get("memoire"));

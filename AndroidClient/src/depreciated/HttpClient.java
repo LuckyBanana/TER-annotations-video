@@ -12,8 +12,6 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
-import java.util.Map.Entry;
 
 import models.Annotation;
 import models.Video;
@@ -181,7 +179,7 @@ public class HttpClient {
 		InputStream is = null;
 	    // Only display the first 1000 characters of the retrieved
 	    // web page content.
-	    int len = 1000; // ?
+	    //int len = 1000; // ?
 	        
 	    try {
 	        URL url = new URL(BASE_URL+path);
@@ -236,7 +234,8 @@ public class HttpClient {
 	        conn.setDoInput(true);
 	        // Starts the query
 	        conn.connect();
-	        int response = conn.getResponseCode();
+	        @SuppressWarnings("unused")
+			int response = conn.getResponseCode();
 	        is = conn.getInputStream();
 
 	        // Convert the InputStream into a string

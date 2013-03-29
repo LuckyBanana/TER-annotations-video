@@ -5,7 +5,6 @@ import java.util.List;
 
 import models.Annotation;
 import models.Video;
-import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -94,7 +93,7 @@ public class Videos  extends Controller{
 	public static Result upload() {
 
 		Form<Video> form = Form.form(Video.class).bindFromRequest();
-		DynamicForm df = Form.form().bindFromRequest();
+		//DynamicForm df = Form.form().bindFromRequest();
 		
 		String result = "";
 		if(form.hasErrors() || form.get().getNom() == null) {

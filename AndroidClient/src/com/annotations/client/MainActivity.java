@@ -3,19 +3,13 @@ package com.annotations.client;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import models.Video;
 
-import org.bson.types.MinKey;
 import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import dialogs.NameDialog;
-import dialogs.TraitsDialog;
-import dialogs.TraitsDialog.OnTraitsDialogResult;
 
 import restclient.AnnotationsRESTClientUsage;
 import android.app.Activity;
@@ -36,6 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import dialogs.NameDialog;
 
 public class MainActivity extends Activity {
 
@@ -64,7 +59,7 @@ public class MainActivity extends Activity {
 			 * Mode connecté
 			 */
 			
-			//listViewInit();
+			listViewInit();
 		} else {
 			/*
 			 * Mode hors connexion

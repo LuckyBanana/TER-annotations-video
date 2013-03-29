@@ -127,6 +127,8 @@ public class AnnotationsRESTClientUsage {
 		params.put("commentaire", a.getCommentaire());
 		params.put("timecodeDebut", a.getTimecodeDebut());
 		params.put("timecodeFin", a.getTimecodeFin());
+		params.put("x", a.getQuadrant().getX());
+		params.put("y", a.getQuadrant().getY());
 		params.put("volonte", a.getQuadrant().getTraits().get("volonte"));
 		params.put("imagination", a.getQuadrant().getTraits().get("imagination"));
 		params.put("perception", a.getQuadrant().getTraits().get("perception"));
