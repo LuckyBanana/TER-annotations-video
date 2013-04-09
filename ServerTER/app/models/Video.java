@@ -111,12 +111,17 @@ public class Video{
 
 		Map<Point, Float> trans = new HashMap<Point, Float>();
 		for(Quadrant quadrant : quadrants) {
-			float x = quadrant.getMap().get("x");
-			float y = quadrant.getMap().get("y");
-			g.setColor(Quadrant.quelleDominante((int) x, (int)y, quadrants));
+			try {
+				float x = quadrant.getMap().get("x");
+				float y = quadrant.getMap().get("y");
+				g.setColor(Quadrant.quelleDominante((int) x, (int)y, quadrants));
 
-			g.fillOval((int) x, (int) y, 20, 20);
-			trans.put(new Point((int)x-600,(int)y-400), (float) Math.toDegrees(Math.atan((y-400)/(x-600))));
+				g.fillOval((int) x, (int) y, 20, 20);
+				trans.put(new Point((int)x-600,(int)y-400), (float) Math.toDegrees(Math.atan((y-400)/(x-600))));
+			}
+			catch(NullPointerException e) {
+				
+			}
 		}
 
 		List<Point> keys = new ArrayList<Point>(trans.keySet());
@@ -125,7 +130,7 @@ public class Video{
 		Quadrant.relierPoints(keys, quadrants, g);
 
 
-		File file = new File(getId().toString()+".png");
+		File file = new File("public"+File.separator+"quadrant"+File.separator+getId().toString()+".png");
 		try {
 			ImageIO.write(image, "png", file);
 		} catch (IOException e) {

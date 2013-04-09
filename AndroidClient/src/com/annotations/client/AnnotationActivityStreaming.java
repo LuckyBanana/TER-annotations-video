@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import models.Annotation;
 import models.Quadrant;
@@ -21,11 +23,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -84,9 +88,18 @@ public class AnnotationActivityStreaming extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.list_annotations:
+
+			/*
 			Intent intent = new Intent(AnnotationActivityStreaming.this, ListAnnotationActivity.class);
 			intent.putExtra(MainActivity.ID, video.getId());
 			startActivity(intent);
+			 */
+
+			String url = client.getQuadrant(video.getId());
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			Uri u = Uri.parse(url);
+			i.setData(u);
+			startActivity(i);
 			return true;
 		case R.id.action_settings:
 			return true;
@@ -188,7 +201,12 @@ public class AnnotationActivityStreaming extends Activity {
 			public void onClick(View v) {
 				String cp;
 				try {
-					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+					/*
+					 *  vid.getCurrentPostion = resultat en ms
+					 *  inutile pour notre usage on elimine les trois derniers chiffres du resultat
+					 */
+					cp = java.lang.String.valueOf(vid.getCurrentPosition())
+							.substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
 				}
 				catch(Exception e) {
 					cp = "0";
@@ -327,17 +345,45 @@ public class AnnotationActivityStreaming extends Activity {
 			R.id.annotation_item_tcf, R.id.annotation_item_commentaire});
 		listView.setAdapter(mSchedule);
 
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
 				// Action quand annotation cliquée ?
+				/*
 				String tcd = listItem.get(position).get("tcd");
 				vid.seekTo(Integer.parseInt(tcd));
+				 */
 			}
 		});
 
+		/*
+		Timer timer = new Timer(true);
+		timer.scheduleAtFixedRate(new TimerTask() {
 
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				for(int i = 0; i < listItem.size(); i++) {
+					// Il existe probablement un autre moyen largement moins dégueulasse (à chercher)
+					int tcd = Integer.parseInt(listItem.get(i).get("tcd").substring(8, 9))*100
+							+ Integer.parseInt(listItem.get(i).get("tcd").substring(11, 12));
+					int tcf = Integer.parseInt(listItem.get(i).get("tcf").substring(6, 7))*100
+							+ Integer.parseInt(listItem.get(i).get("tcf").substring(9, 10));
+					if(vid.getCurrentPosition()/1000 > tcd &&
+							vid.getCurrentPosition()/1000 < tcf) {
+						System.out.println("cc");
+						listView.getChildAt(i).setBackgroundColor(Color.RED);
+					}
+					else {
+						System.out.println("co");
+						listView.getChildAt(i).setBackgroundColor(Color.WHITE);
+					}
+				}
+			}
+		}, 0, 1000);
+	*/
 	}
 
 	/**

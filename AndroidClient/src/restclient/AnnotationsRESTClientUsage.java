@@ -13,6 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -205,6 +207,34 @@ public class AnnotationsRESTClientUsage {
 		}
 
 		return getRslt();
+	}
+	
+	public String getQuadrant(final String id) {
+		final CountDownLatch signal = new CountDownLatch(1);
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				AnnotationsRESTClient.get("api/video/quadrant/"+id, null, new JsonHttpResponseHandler() {
+					@Override
+					public void onSuccess(JSONArray response) {
+						
+					}
+					@Override
+					public void onFinish() {
+						signal.countDown();
+					}
+				});
+			}
+		}).start();
+
+		try {
+			signal.await(); // wait for callback
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		return "http://ter-server.herokuapp.com/quadrant/"+id+".png";
 	}
 	
 	public String postVideo(Video v) {

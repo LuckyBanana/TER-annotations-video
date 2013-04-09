@@ -71,7 +71,7 @@ public class Videos  extends Controller{
 			}
 		}
 		
-		return ok();
+		return ok("<img src=\"public/quadrant/"+id+".png\">quadrant</img>").as("text/html");
 	}
 
 	/*
