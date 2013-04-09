@@ -42,6 +42,10 @@ public class Quadrant {
 		map.put("entrainement", e);
 	}
 	
+	/*
+	 * Initialise les couleurs correspondant à chanque trait de caractere.
+	 */
+	
 	public void initCouleurs() {
 		codeCouleur.put("volonte", Color.red);
 		codeCouleur.put("imagination", Color.yellow);
@@ -49,6 +53,10 @@ public class Quadrant {
 		codeCouleur.put("memoire", Color.green);
 		codeCouleur.put("entrainement", Color.blue);
 	}
+	
+	/*
+	 * Initialise une liste de quadrants avec des valeurs aleatoires.
+	 */
 	
 	public void test(List<Quadrant> quadrants) {
 		for(int i = 0; i < 15; i++) {
@@ -65,6 +73,11 @@ public class Quadrant {
 		}
 	}
 	
+	/*
+	 * Renvoie la couleur avec laquelle un point doit etre dessine,
+	 * 	en fonction du trait de caractere dominant.
+	 */
+	
 	public static Color quelleCouleur(List<Point> list, List<Quadrant> quadrants) {
 		int dist = 0;
 		Point res = new Point();
@@ -80,6 +93,7 @@ public class Quadrant {
 
 	/*
 	 * Volonté, Imagination, Perception, Mémoire, Entrainement
+	 * Renvoie le trait de caractere dominant.
 	 */
 	
 	public static Color quelleDominante(int x, int y, List<Quadrant> quadrants) {
@@ -112,6 +126,13 @@ public class Quadrant {
 		return codeCouleur.get(code);
 	}
 
+	/*
+	 * Renvoie le quart de quadrant dans lequel le point passe en parametre se trouve.
+	 * 							1|2
+	 * 							---
+	 * 							4|3
+	 */
+	
 	public static int quelQuadrant(Point point) {
 		if(point.x > -600 && point.x < 0 && point.y > -400 && point.y < 0) {
 			return 1;
@@ -129,6 +150,7 @@ public class Quadrant {
 	
 	/*
 	 * Liste de points, Liste de 4 couleurs
+	 * Relie les points entre eux par quadrant et à l'origine.
 	 */
 
 	public static void relierPoints(List<Point> keys, List<Quadrant> quadrants, Graphics2D g) {

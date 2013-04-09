@@ -35,4 +35,5 @@
     <string name="perception">Perception </string>
 	<string name="memoire">Memoire </string>
 	<string name="entrainement">Entrainement </string>
+	<string name="refresh_main">Rafraichir</string>
 </resources>

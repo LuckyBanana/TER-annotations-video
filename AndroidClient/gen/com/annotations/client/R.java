@@ -23,9 +23,10 @@ public final class R {
     public static final class drawable {
         public static final int get_annotation_on_video_icon=0x7f020000;
         public static final int ic_launcher=0x7f020001;
-        public static final int quadrant_traits_icon=0x7f020002;
-        public static final int save_button=0x7f020003;
-        public static final int valider_quadrant_icon=0x7f020004;
+        public static final int ic_refresh_main=0x7f020002;
+        public static final int quadrant_traits_icon=0x7f020003;
+        public static final int save_button=0x7f020004;
+        public static final int valider_quadrant_icon=0x7f020005;
     }
     public static final class id {
         public static final int action_settings=0x7f08002f;
@@ -43,7 +44,7 @@ public final class R {
         public static final int entrainement_layout=0x7f080027;
         public static final int entrainement_name=0x7f080028;
         public static final int entrainement_rating=0x7f08002a;
-        public static final int entrer_traits=0x7f080033;
+        public static final int entrer_traits=0x7f080034;
         public static final int imagination_int=0x7f08001d;
         public static final int imagination_layout=0x7f08001b;
         public static final int imagination_name=0x7f08001c;
@@ -62,6 +63,7 @@ public final class R {
         public static final int perception_layout=0x7f08001f;
         public static final int perception_name=0x7f080020;
         public static final int perception_rating=0x7f080022;
+        public static final int refresh_main_activity=0x7f080032;
         public static final int seek_bar_annotation=0x7f08000c;
         public static final int textCommentaire=0x7f080003;
         public static final int textNom=0x7f080002;
@@ -73,7 +75,7 @@ public final class R {
         public static final int trait_name=0x7f080015;
         public static final int traits_dialog_root=0x7f080016;
         public static final int validerAnnotation=0x7f08000a;
-        public static final int valider_quadrant=0x7f080032;
+        public static final int valider_quadrant=0x7f080033;
         public static final int valider_traits=0x7f08002b;
         public static final int videoMin=0x7f080000;
         public static final int volonte_int=0x7f080019;
@@ -121,6 +123,7 @@ public final class R {
         public static final int list_annotations=0x7f050013;
         public static final int memoire=0x7f050020;
         public static final int perception=0x7f05001f;
+        public static final int refresh_main=0x7f050022;
         public static final int text_commentaire=0x7f050005;
         public static final int text_index=0x7f050010;
         public static final int text_nom=0x7f050004;

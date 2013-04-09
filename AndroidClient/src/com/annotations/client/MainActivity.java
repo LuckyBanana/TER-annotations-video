@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 			/*
 			 * Mode hors connexion
 			 */
-			Toast.makeText(this, "This apps requires an internet connection.", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Cette application nécessite une connexion internet.", Toast.LENGTH_LONG).show();
 		}
 
 
@@ -104,6 +104,10 @@ public class MainActivity extends Activity {
 			intent.setType("video/*");
 			startActivityForResult(intent, 1);
 			return true;
+		case R.id.refresh_main_activity:
+			Toast.makeText(this, "Rafraichissement en cours...", Toast.LENGTH_SHORT).show();
+			listViewInit();
+			return true;
 		case R.id.action_settings:
 			return true;
 		default:
@@ -130,7 +134,7 @@ public class MainActivity extends Activity {
 
 	public void listViewInit() {
 
-		progressDialog = ProgressDialog.show(MainActivity.this, "", "Loading videos...", true);
+		progressDialog = ProgressDialog.show(MainActivity.this, "", "Chargement des videos...", true);
 		progressDialog.setCancelable(false);  
 
 		final ListView listView = (ListView)findViewById(R.id.list_main_activity);
@@ -154,6 +158,8 @@ public class MainActivity extends Activity {
 				progressDialog.dismiss(); 
 			} catch (JSONException e) {
 				e.printStackTrace();
+				progressDialog.dismiss(); 
+				Toast.makeText(this, "Impossible de contacter le serveur.", Toast.LENGTH_LONG).show();
 			}
 		}
 

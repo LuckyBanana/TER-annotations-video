@@ -84,10 +84,16 @@ public class Video{
 		this.path = path;
 	}
 	
+	/*
+	 * Renvoie la liste de tous les quadrants issus des annotations.
+	 */
+
 	public List<Quadrant> getQuadrants() {
 		List<Quadrant> quadrants = new ArrayList<Quadrant>();
 		for(Annotation a : getAnnotations()) {
-			quadrants.add(a.getQuadrant());
+			Quadrant qd = a.getQuadrant();
+			qd.getMap().put("an", getAnnotations().indexOf(a));
+			quadrants.add(qd);
 		}
 		return quadrants;
 	}
@@ -95,12 +101,11 @@ public class Video{
 
 
 	/*
-	 * Générer un quadrant pour une video
+	 * Générer un quadrant pour une video donnée
 	 */
 
 	public void genererQuadrant() {
 		List<Quadrant> quadrants = getQuadrants();
-
 		BufferedImage image = new BufferedImage(1200, 800, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		g.setColor(Color.WHITE);
@@ -115,12 +120,19 @@ public class Video{
 				float x = quadrant.getMap().get("x");
 				float y = quadrant.getMap().get("y");
 				g.setColor(Quadrant.quelleDominante((int) x, (int)y, quadrants));
-
 				g.fillOval((int) x, (int) y, 20, 20);
+
+
+				//Ajouter le timecode à coté du point
+
+				g.drawString("["+getAnnotations().get(quadrant.getMap().get("an")).getTimecodeDebut()+" , "+
+						getAnnotations().get(quadrant.getMap().get("an")).getTimecodeFin()+"]", x, y);
+				
+				//Translation des points dans un repere avec pour origine le point (600, 400)
 				trans.put(new Point((int)x-600,(int)y-400), (float) Math.toDegrees(Math.atan((y-400)/(x-600))));
 			}
 			catch(NullPointerException e) {
-				
+
 			}
 		}
 

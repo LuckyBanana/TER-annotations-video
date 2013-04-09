@@ -280,7 +280,7 @@ public class AnnotationActivityStreaming extends Activity {
 		System.out.println(url);
 		Uri uri = Uri.parse(url);
 
-		progressDialog = ProgressDialog.show(AnnotationActivityStreaming.this, "", "Buffering video...", true);
+		progressDialog = ProgressDialog.show(AnnotationActivityStreaming.this, "", "Chargement de la video...", true);
 		progressDialog.setCancelable(false);  
 
 		mc.setAnchorView(vid);
