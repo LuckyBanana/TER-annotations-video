@@ -155,10 +155,10 @@ public class MainActivity extends Activity {
 				map.put("id", videoId.toString());
 				map.put("path", obj.getString("path"));
 				listItem.add(map);	      
-				progressDialog.dismiss(); 
+				//progressDialog.dismiss(); 
 			} catch (JSONException e) {
 				e.printStackTrace();
-				progressDialog.dismiss(); 
+				 
 				Toast.makeText(this, "Impossible de contacter le serveur.", Toast.LENGTH_LONG).show();
 			}
 		}
@@ -182,6 +182,8 @@ public class MainActivity extends Activity {
 				startActivity(i);
 			}
 		});
+		
+		progressDialog.dismiss();
 	}
 
 

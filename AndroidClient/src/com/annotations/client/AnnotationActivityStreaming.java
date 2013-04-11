@@ -28,6 +28,8 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -49,11 +51,24 @@ import android.widget.VideoView;
 @SuppressWarnings("unused")
 public class AnnotationActivityStreaming extends Activity {
 
+	private final String LIST_ITEM_INDEX = "ListItemIndex";
+	private final String LIST_ITEM_COLOR = "ListItemColor";
+
 	private AnnotationsRESTClientUsage client = new AnnotationsRESTClientUsage(this);
 	private Video video = new Video();
 	private VideoView vid;
 	private static ProgressDialog progressDialog;
 	private Quadrant quadrant = new Quadrant();
+	private ListView listView;
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			System.out.println("msg");
+			listView
+			.getChildAt(msg.getData().getInt(LIST_ITEM_INDEX))
+			.setBackgroundColor(msg.getData().getInt(LIST_ITEM_COLOR));
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +77,13 @@ public class AnnotationActivityStreaming extends Activity {
 		String path = intent.getStringExtra(MainActivity.PATH);
 		String videoId = intent.getStringExtra(MainActivity.ID);
 		video.setId(videoId);
+		ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
 
 		super.onCreate(savedInstanceState);
 		if(isTabletDevice(this)) {
 			setContentView(R.layout.activity_annotation_tablet);
 			vid = (VideoView)findViewById(R.id.videoMin);
-			listViewInit(vid);
+			listItem = listViewInit(vid);
 		}
 		else {
 			setContentView(R.layout.activity_annotation);
@@ -76,6 +92,10 @@ public class AnnotationActivityStreaming extends Activity {
 
 		videoInit(path, vid);
 		buttonsInit(vid);
+
+		if(isTabletDevice(this)) {
+			initColor(vid, listItem);
+		}
 	}
 
 	@Override
@@ -292,7 +312,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
 				if(vid.isPlaying()) {
 					vid.pause();
 				}
@@ -312,15 +331,15 @@ public class AnnotationActivityStreaming extends Activity {
 		});
 	}
 
-	public void listViewInit(final VideoView vid) {
-		final ListView listView = (ListView)findViewById(R.id.list_annotation_view);
+	public ArrayList<HashMap<String, String>> listViewInit(final VideoView vid) {
+		listView = (ListView)findViewById(R.id.list_annotation_view);
 		Intent intent = getIntent();
 		String videoId = intent.getStringExtra(MainActivity.ID);
 		System.out.println(videoId);
 		String result = client.getAnnotationsOnVideo(videoId);
 		System.out.println(result);
 		JSONArray array = client.getJsonArray();
-		final ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
+		ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
 		HashMap<String, String> map;
 
 		for(int i = 0; i < array.length(); i++) {
@@ -345,7 +364,6 @@ public class AnnotationActivityStreaming extends Activity {
 			R.id.annotation_item_tcf, R.id.annotation_item_commentaire});
 		listView.setAdapter(mSchedule);
 
-
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
@@ -358,32 +376,64 @@ public class AnnotationActivityStreaming extends Activity {
 			}
 		});
 
-		/*
-		Timer timer = new Timer(true);
+		return listItem;
+
+	}
+
+	public void initColor(final VideoView vid, final ArrayList<HashMap<String, String>> listItem) {
+
+		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				for(int i = 0; i < listItem.size(); i++) {
-					// Il existe probablement un autre moyen largement moins dégueulasse (à chercher)
-					int tcd = Integer.parseInt(listItem.get(i).get("tcd").substring(8, 9))*100
-							+ Integer.parseInt(listItem.get(i).get("tcd").substring(11, 12));
-					int tcf = Integer.parseInt(listItem.get(i).get("tcf").substring(6, 7))*100
-							+ Integer.parseInt(listItem.get(i).get("tcf").substring(9, 10));
-					if(vid.getCurrentPosition()/1000 > tcd &&
-							vid.getCurrentPosition()/1000 < tcf) {
-						System.out.println("cc");
-						listView.getChildAt(i).setBackgroundColor(Color.RED);
+
+				Bundle messageBundle = new Bundle();
+				Message message;
+
+				if(vid.isPlaying()) {
+					for(int i = 0; i < listItem.size(); i++) {
+						// Il existe probablement un autre moyen largement moins dégueulasse (à chercher)
+						String tcd_m = ""+listItem.get(i).get("tcd").charAt(8)+listItem.get(i).get("tcd").charAt(9);
+						String tcd_s = ""+listItem.get(i).get("tcd").charAt(11)+listItem.get(i).get("tcd").charAt(12);
+						String tcf_m = ""+listItem.get(i).get("tcf").charAt(6)+listItem.get(i).get("tcf").charAt(7);
+						String tcf_s = ""+listItem.get(i).get("tcf").charAt(9)+listItem.get(i).get("tcf").charAt(10);
+						int tcd = Integer.parseInt(tcd_m)*100
+								+ Integer.parseInt(tcd_s);
+						int tcf = Integer.parseInt(tcf_m)*100
+								+ Integer.parseInt(tcf_s);
+						
+						System.out.println("cp"+vid.getCurrentPosition()/1000);
+						System.out.println("tcd"+tcd);
+						System.out.println("tcf"+listItem.get(i).get("tcf").charAt(10));
+						
+						if(vid.getCurrentPosition()/1000 > tcd &&
+								vid.getCurrentPosition()/1000 < tcf) {
+							System.out.println("message"+i+"red");
+							message = handler.obtainMessage();
+							messageBundle.putInt(LIST_ITEM_INDEX, i);
+							messageBundle.putInt(LIST_ITEM_COLOR, Color.RED);
+							message.setData(messageBundle);
+							handler.sendMessage(message);
+							//listView.getChildAt(i).setBackgroundColor(Color.RED);
+						}
+						else {
+							System.out.println("message"+i+"white");
+							message = handler.obtainMessage();
+							messageBundle.putInt(LIST_ITEM_INDEX, i);
+							messageBundle.putInt(LIST_ITEM_COLOR, Color.WHITE);
+							message.setData(messageBundle);
+							handler.sendMessage(message);
+							//listView.getChildAt(i).setBackgroundColor(Color.WHITE);
+						}
 					}
-					else {
-						System.out.println("co");
-						listView.getChildAt(i).setBackgroundColor(Color.WHITE);
-					}
+
 				}
 			}
+
 		}, 0, 1000);
-	*/
+
+
 	}
 
 	/**
