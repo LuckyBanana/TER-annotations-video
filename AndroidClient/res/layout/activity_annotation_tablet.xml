@@ -4,12 +4,64 @@
     android:layout_height="match_parent"
     tools:context=".AnnotationActivity" >
 
+    <RelativeLayout
+        android:id="@+id/button_bar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" >
+
+        <Button
+            android:id="@+id/bb_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/bb_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/bb_button1" />
+
+        <Button
+            android:id="@+id/bb_button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/bb_button2" />
+
+        <Button
+            android:id="@+id/bb_button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/bb_button3" />
+
+        <Button
+            android:id="@+id/bb_button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/bb_button4" />
+
+        <Button
+            android:id="@+id/bb_button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/bb_button5" />
+
+        <Button
+            android:id="@+id/bb_button7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/bb_button6" />
+
+        <Button
+            android:id="@+id/bb_button8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/bb_button7" />
+    </RelativeLayout>
+
     <VideoView
         android:id="@+id/videoMin"
         android:layout_width="640dp"
         android:layout_height="352dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/button_bar_layout" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -100,17 +152,33 @@
             android:id="@+id/creerQuadrant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/validerAnnotation"
+            android:layout_below="@+id/bouton_fin_annotation"
+            android:layout_toRightOf="@+id/validerAnnotation"
             android:text="@string/creerQuadrant" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/list_annotation_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="352dp"
+        android:layout_below="@+id/button_bar_layout"
+        android:layout_toRightOf="@+id/videoMin" >
+
+        <ListView
+            android:id="@+id/list_annotation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </ListView>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/list_annotation_layout"
         android:layout_toRightOf="@+id/videoMin" >
 
         <ListView
-            android:id="@+id/list_annotation_view"
+            android:id="@+id/list_observation_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
         </ListView>

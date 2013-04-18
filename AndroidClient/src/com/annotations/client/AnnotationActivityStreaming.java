@@ -9,6 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import models.Annotation;
+import models.Observation;
 import models.Quadrant;
 import models.Video;
 
@@ -53,20 +54,33 @@ public class AnnotationActivityStreaming extends Activity {
 
 	private final String LIST_ITEM_INDEX = "ListItemIndex";
 	private final String LIST_ITEM_COLOR = "ListItemColor";
+	private final String REFRESH_LIST_VIEW = "RefreshLIstView";
 
 	private AnnotationsRESTClientUsage client = new AnnotationsRESTClientUsage(this);
 	private Video video = new Video();
 	private VideoView vid;
 	private static ProgressDialog progressDialog;
 	private Quadrant quadrant = new Quadrant();
-	private ListView listView;
+	private ListView annotationsListView;
+	private ListView observationsListView;
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			System.out.println("msg");
-			listView
-			.getChildAt(msg.getData().getInt(LIST_ITEM_INDEX))
-			.setBackgroundColor(msg.getData().getInt(LIST_ITEM_COLOR));
+			if(msg.getData().getInt(REFRESH_LIST_VIEW) == 0) {
+				annotationsViewInit(vid);
+			}
+			else {
+				try {
+					annotationsListView
+					.getChildAt(msg.getData().getInt(LIST_ITEM_INDEX))
+					.setBackgroundColor(msg.getData().getInt(LIST_ITEM_COLOR));
+				}
+				catch(NullPointerException npe) {
+					Log.d("handler", "");
+				}
+			}
+
 		}
 	};
 
@@ -82,8 +96,10 @@ public class AnnotationActivityStreaming extends Activity {
 		super.onCreate(savedInstanceState);
 		if(isTabletDevice(this)) {
 			setContentView(R.layout.activity_annotation_tablet);
+			buttonBarInit();
 			vid = (VideoView)findViewById(R.id.videoMin);
-			listItem = listViewInit(vid);
+			listItem = annotationsViewInit(vid);
+			observationsViewInit();
 		}
 		else {
 			setContentView(R.layout.activity_annotation);
@@ -181,6 +197,186 @@ public class AnnotationActivityStreaming extends Activity {
 		return result;
 	}
 
+	public void buttonBarInit() {
+		Button bb_button1 = (Button)findViewById(R.id.bb_button1);
+		Button bb_button2 = (Button)findViewById(R.id.bb_button2);
+		Button bb_button3 = (Button)findViewById(R.id.bb_button3);
+		Button bb_button4 = (Button)findViewById(R.id.bb_button4);
+		Button bb_button5 = (Button)findViewById(R.id.bb_button5);
+		Button bb_button6 = (Button)findViewById(R.id.bb_button6);
+		Button bb_button7 = (Button)findViewById(R.id.bb_button7);
+		Button bb_button8 = (Button)findViewById(R.id.bb_button8);
+
+		bb_button1.setText("Stand By");
+		bb_button2.setText("Try to grasp w/o contact");
+		bb_button3.setText("Try to grasp w/ contact");
+		bb_button4.setText("1 grasped hand");
+		bb_button5.setText("1 grasped hand, the other in contact");
+		bb_button6.setText("2 grasped hands");
+		bb_button7.setText("Attack");
+		bb_button8.setText("Throw");
+
+		bb_button1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String cp;
+				try {
+					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+				}
+				catch(Exception e) {
+					cp = "0";
+				}
+				List<String> res = CurrentPositionToSecAndMin(cp);
+				String sec = res.get(0);
+				String min = res.get(1);
+				Observation post = new Observation("1", min.concat(sec));
+				client.postObservation(post, video);
+			}
+		});
+		
+		bb_button2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String cp;
+				try {
+					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+				}
+				catch(Exception e) {
+					cp = "0";
+				}
+				List<String> res = CurrentPositionToSecAndMin(cp);
+				String sec = res.get(0);
+				String min = res.get(1);
+				Observation post = new Observation("0.9", min.concat(sec));
+				client.postObservation(post, video);
+			}
+		});
+		
+		bb_button3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String cp;
+				try {
+					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+				}
+				catch(Exception e) {
+					cp = "0";
+				}
+				List<String> res = CurrentPositionToSecAndMin(cp);
+				String sec = res.get(0);
+				String min = res.get(1);
+				Observation post = new Observation("0.8", min.concat(sec));
+				client.postObservation(post, video);
+			}
+		});
+		
+		bb_button4.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String cp;
+				try {
+					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+				}
+				catch(Exception e) {
+					cp = "0";
+				}
+				List<String> res = CurrentPositionToSecAndMin(cp);
+				String sec = res.get(0);
+				String min = res.get(1);
+				Observation post = new Observation("0.7", min.concat(sec));
+				client.postObservation(post, video);
+			}
+		});
+		
+		bb_button5.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String cp;
+				try {
+					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+				}
+				catch(Exception e) {
+					cp = "0";
+				}
+				List<String> res = CurrentPositionToSecAndMin(cp);
+				String sec = res.get(0);
+				String min = res.get(1);
+				Observation post = new Observation("0.6", min.concat(sec));
+				client.postObservation(post, video);
+			}
+		});
+		
+		bb_button6.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String cp;
+				try {
+					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+				}
+				catch(Exception e) {
+					cp = "0";
+				}
+				List<String> res = CurrentPositionToSecAndMin(cp);
+				String sec = res.get(0);
+				String min = res.get(1);
+				Observation post = new Observation("0.5", min.concat(sec));
+				client.postObservation(post, video);
+			}
+		});
+		
+		bb_button7.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String cp;
+				try {
+					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+				}
+				catch(Exception e) {
+					cp = "0";
+				}
+				List<String> res = CurrentPositionToSecAndMin(cp);
+				String sec = res.get(0);
+				String min = res.get(1);
+				Observation post = new Observation("0.4", min.concat(sec));
+				client.postObservation(post, video);
+			}
+		});
+		
+		bb_button8.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String cp;
+				try {
+					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
+				}
+				catch(Exception e) {
+					cp = "0";
+				}
+				List<String> res = CurrentPositionToSecAndMin(cp);
+				String sec = res.get(0);
+				String min = res.get(1);
+				Observation post = new Observation("0.2", min.concat(sec));
+				client.postObservation(post, video);
+			}
+		});
+	}
+
 	public void buttonsInit(final VideoView vid) {
 		Button bouton_debut = (Button)findViewById(R.id.bouton_debut_annotation);
 		Button bouton_fin = (Button)findViewById(R.id.bouton_fin_annotation);
@@ -274,6 +470,21 @@ public class AnnotationActivityStreaming extends Activity {
 					tcd_m.setText("");
 					tcf_s.setText("");
 					tcf_m.setText("");
+
+					Timer timer = new Timer();
+					timer.schedule(new TimerTask() {
+
+						@Override
+						public void run() {
+							Bundle messageBundle = new Bundle();
+							Message message;
+							message = handler.obtainMessage();
+							messageBundle.putInt(REFRESH_LIST_VIEW, 0);
+							message.setData(messageBundle);
+							handler.sendMessage(message);
+						}
+
+					}, 3000);
 				}
 			}
 		});
@@ -282,7 +493,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent i = new Intent(AnnotationActivityStreaming.this, QuadrantActivity.class);
 				startActivityForResult(i, 2);
 			}
@@ -330,14 +540,40 @@ public class AnnotationActivityStreaming extends Activity {
 			}
 		});
 	}
-
-	public ArrayList<HashMap<String, String>> listViewInit(final VideoView vid) {
-		listView = (ListView)findViewById(R.id.list_annotation_view);
+	
+	public void observationsViewInit() {
+		observationsListView = (ListView)findViewById(R.id.list_observation_view);
 		Intent intent = getIntent();
 		String videoId = intent.getStringExtra(MainActivity.ID);
-		System.out.println(videoId);
+		String result = client.getObservationsOnVideo(videoId);
+		JSONArray array = client.getJsonArray();
+		ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
+		HashMap<String, String> map;
+		
+		for(int i = 0; i < array.length(); i++) {
+			try {				
+				JSONObject obj = array.getJSONObject(i);
+				map = new HashMap<String, String>();
+				map.put("codeObservation", "Code : "+obj.getString("codeObservation"));
+				map.put("timecode", "Date : "+obj.getString("timecode").charAt(0)+obj.getString("timecode").charAt(1)+
+						":"+obj.getString("timecode").charAt(2)+obj.getString("timecode").charAt(3));
+
+				listItem.add(map);	       
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		SimpleAdapter mSchedule = new SimpleAdapter (this.getBaseContext(), listItem, R.layout.observation_item,
+				new String[] {"codeObservation", "timecode"}, new int[] {R.id.observation_item_code, R.id.observation_item_timecode});
+		observationsListView.setAdapter(mSchedule);
+	}
+
+	public ArrayList<HashMap<String, String>> annotationsViewInit(final VideoView vid) {
+		annotationsListView = (ListView)findViewById(R.id.list_annotation_view);
+		Intent intent = getIntent();
+		String videoId = intent.getStringExtra(MainActivity.ID);
 		String result = client.getAnnotationsOnVideo(videoId);
-		System.out.println(result);
 		JSONArray array = client.getJsonArray();
 		ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
 		HashMap<String, String> map;
@@ -362,9 +598,9 @@ public class AnnotationActivityStreaming extends Activity {
 		SimpleAdapter mSchedule = new SimpleAdapter (this.getBaseContext(), listItem, R.layout.annotation_item,
 				new String[] {"nom", "tcd", "tcf", "com"}, new int[] {R.id.annotation_item_nom, R.id.annotation_item_tcd,
 			R.id.annotation_item_tcf, R.id.annotation_item_commentaire});
-		listView.setAdapter(mSchedule);
+		annotationsListView.setAdapter(mSchedule);
 
-		listView.setOnItemClickListener(new OnItemClickListener() {
+		annotationsListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
@@ -402,15 +638,16 @@ public class AnnotationActivityStreaming extends Activity {
 								+ Integer.parseInt(tcd_s);
 						int tcf = Integer.parseInt(tcf_m)*100
 								+ Integer.parseInt(tcf_s);
-						
+
 						System.out.println("cp"+vid.getCurrentPosition()/1000);
 						System.out.println("tcd"+tcd);
 						System.out.println("tcf"+listItem.get(i).get("tcf").charAt(10));
-						
+
 						if(vid.getCurrentPosition()/1000 > tcd &&
 								vid.getCurrentPosition()/1000 < tcf) {
 							System.out.println("message"+i+"red");
 							message = handler.obtainMessage();
+							messageBundle.putInt(REFRESH_LIST_VIEW, 1);
 							messageBundle.putInt(LIST_ITEM_INDEX, i);
 							messageBundle.putInt(LIST_ITEM_COLOR, Color.RED);
 							message.setData(messageBundle);
@@ -420,6 +657,7 @@ public class AnnotationActivityStreaming extends Activity {
 						else {
 							System.out.println("message"+i+"white");
 							message = handler.obtainMessage();
+							messageBundle.putInt(REFRESH_LIST_VIEW, 1);
 							messageBundle.putInt(LIST_ITEM_INDEX, i);
 							messageBundle.putInt(LIST_ITEM_COLOR, Color.WHITE);
 							message.setData(messageBundle);

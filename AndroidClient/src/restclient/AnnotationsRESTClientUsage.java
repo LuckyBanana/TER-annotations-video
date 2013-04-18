@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
 import models.Annotation;
+import models.Observation;
 import models.Video;
 
 import org.json.JSONArray;
@@ -117,6 +118,46 @@ public class AnnotationsRESTClientUsage {
 
 		return getRslt();
 	}
+	
+	public String getObservationsOnVideo(final String id) {
+		//GET api/video/:id/observations
+		final CountDownLatch signal = new CountDownLatch(1);
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				AnnotationsRESTClient.get("api/video/"+id+"/observations", null, new JsonHttpResponseHandler() {
+					@Override
+					public void onSuccess(JSONArray response) {
+						JSONObject firstObject;
+						String result = "";
+						try {
+							setJsonArray(response);
+							for(int i = 0; i < response.length(); i++){
+								firstObject = (JSONObject) response.get(0);
+								result += firstObject.toString();
+							}
+							setRslt(result);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+					@Override
+					public void onFinish() {
+						signal.countDown();
+					}
+				});
+			}
+		}).start();
+
+		try {
+			signal.await(); // wait for callback
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		return getRslt();
+	}
 
 	public void postAnnotation(Annotation a, Video v) {
 
@@ -158,6 +199,27 @@ public class AnnotationsRESTClientUsage {
 			@Override
 			public void onFinish() {
 				Toast.makeText(activity, "Annotation posted", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+	
+	public void postObservation(Observation o, Video v) {
+
+		//POST "api/annotation/videoId" Annotation + VideoId
+
+		RequestParams params = new RequestParams();
+		params.put("codeObservation", o.getCodeObservation());
+		params.put("timecode", o.getTimecode());
+
+
+		AnnotationsRESTClient.post("api/observation/"+v.getId(), params, new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(JSONArray response) {
+
+			}
+			@Override
+			public void onFinish() {
+				Toast.makeText(activity, "Observation postee", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

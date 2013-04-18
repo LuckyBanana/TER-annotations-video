@@ -62,6 +62,15 @@ public class Videos  extends Controller{
 		}
 		return ok("Error : Unknown Id");
 	}
+	
+	public static Result getObservationsOnVideo(String id) {
+		List<Video> res = MorphiaObject.datastore.find(Video.class).asList();
+		for(Video v : res) {
+			if(v.getId().equals(id))
+				return ok(Json.toJson(v.getObservations()));
+		}
+		return ok("Error : Unknown Id");
+	}
 
 	public static Result getQuadrant(String id) {
 		List<Video> res = MorphiaObject.datastore.find(Video.class).asList();

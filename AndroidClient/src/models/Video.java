@@ -10,15 +10,18 @@ public class Video {
 	private String path;
 	private File stream;
 	private Vector<Annotation> annotations;
+	private Vector<Observation> observations;
 	
 	public Video() {
 		setAnnotations(new Vector<Annotation>());
+		setObservations(new Vector<Observation>());
 	}
 	
 	public Video(String n, String f) {
 		setNom(n);
 		setPath(f);
 		setAnnotations(new Vector<Annotation>());
+		setObservations(new Vector<Observation>());
 	}
 
 	public String getId() {
@@ -59,6 +62,14 @@ public class Video {
 
 	public void setStream(File stream) {
 		this.stream = stream;
+	}
+
+	public Vector<Observation> getObservations() {
+		return observations;
+	}
+
+	public void setObservations(Vector<Observation> observations) {
+		this.observations = observations;
 	}
 	
 

@@ -30,6 +30,7 @@ public class Video{
 	private String path;
 
 	private Vector<Annotation> annotations;
+	private Vector<Observation> observations;
 	// private User user;
 	// private Date date;
 
@@ -149,5 +150,13 @@ public class Video{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public Vector<Observation> getObservations() {
+		return observations;
+	}
+
+	public void setObservations(Vector<Observation> observations) {
+		this.observations = observations;
 	}
 }
