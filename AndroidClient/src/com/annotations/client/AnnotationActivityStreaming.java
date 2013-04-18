@@ -63,6 +63,7 @@ public class AnnotationActivityStreaming extends Activity {
 	private Quadrant quadrant = new Quadrant();
 	private ListView annotationsListView;
 	private ListView observationsListView;
+	private Map<String, String> observationsCodes = new HashMap<String, String>();
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -92,6 +93,7 @@ public class AnnotationActivityStreaming extends Activity {
 		String videoId = intent.getStringExtra(MainActivity.ID);
 		video.setId(videoId);
 		ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
+		observationsCodesMapInit();
 
 		super.onCreate(savedInstanceState);
 		if(isTabletDevice(this)) {
@@ -541,6 +543,18 @@ public class AnnotationActivityStreaming extends Activity {
 		});
 	}
 	
+	public void observationsCodesMapInit() {
+		
+		observationsCodes.put("1", "Stand By");
+		observationsCodes.put("0.9", "Try to grasp w/o contact");
+		observationsCodes.put("0.8", "Try to grasp w/ contact");
+		observationsCodes.put("0.7", "1 grasped hand");
+		observationsCodes.put("0.6", "1 grasped hand, the other in contact");
+		observationsCodes.put("0.5", "2 grasped hands");
+		observationsCodes.put("0.4", "Attack");
+		observationsCodes.put("0.2", "Throw");
+	}
+	
 	public void observationsViewInit() {
 		observationsListView = (ListView)findViewById(R.id.list_observation_view);
 		Intent intent = getIntent();
@@ -554,7 +568,7 @@ public class AnnotationActivityStreaming extends Activity {
 			try {				
 				JSONObject obj = array.getJSONObject(i);
 				map = new HashMap<String, String>();
-				map.put("codeObservation", "Code : "+obj.getString("codeObservation"));
+				map.put("codeObservation", "Code : "+observationsCodes.get(obj.getString("codeObservation")));
 				map.put("timecode", "Date : "+obj.getString("timecode").charAt(0)+obj.getString("timecode").charAt(1)+
 						":"+obj.getString("timecode").charAt(2)+obj.getString("timecode").charAt(3));
 
@@ -639,13 +653,8 @@ public class AnnotationActivityStreaming extends Activity {
 						int tcf = Integer.parseInt(tcf_m)*100
 								+ Integer.parseInt(tcf_s);
 
-						System.out.println("cp"+vid.getCurrentPosition()/1000);
-						System.out.println("tcd"+tcd);
-						System.out.println("tcf"+listItem.get(i).get("tcf").charAt(10));
-
 						if(vid.getCurrentPosition()/1000 > tcd &&
 								vid.getCurrentPosition()/1000 < tcf) {
-							System.out.println("message"+i+"red");
 							message = handler.obtainMessage();
 							messageBundle.putInt(REFRESH_LIST_VIEW, 1);
 							messageBundle.putInt(LIST_ITEM_INDEX, i);
@@ -655,7 +664,6 @@ public class AnnotationActivityStreaming extends Activity {
 							//listView.getChildAt(i).setBackgroundColor(Color.RED);
 						}
 						else {
-							System.out.println("message"+i+"white");
 							message = handler.obtainMessage();
 							messageBundle.putInt(REFRESH_LIST_VIEW, 1);
 							messageBundle.putInt(LIST_ITEM_INDEX, i);
