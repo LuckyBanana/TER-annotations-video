@@ -21,11 +21,6 @@ public class Annotation {
 	
 	@Embedded
 	private Quadrant quadrant;
-	//private User user;
-	//private Date date;
-	//private Timecode timecode;
-	//private Phase phase;
-	//private Intervenant intervenant;
 
 	
 	/*

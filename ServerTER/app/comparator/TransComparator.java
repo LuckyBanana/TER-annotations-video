@@ -15,11 +15,8 @@ public class TransComparator implements Comparator<Point>{
 
 	@Override
 	public int compare(Point o1, Point o2) {
-		// TODO Auto-generated method stub
-		Float a1 = map.get(o1);
-		
-		Float a2 = map.get(o2);
-		
+		Float a1 = map.get(o1);		
+		Float a2 = map.get(o2);	
 		return a1.compareTo(a2);
 	}
 

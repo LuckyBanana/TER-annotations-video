@@ -22,7 +22,7 @@ import com.google.code.morphia.annotations.Id;
 import comparator.TransComparator;
 
 @Entity("Video")
-public class Video{
+public class Video {
 
 	@Id
 	private ObjectId id;
@@ -31,8 +31,6 @@ public class Video{
 
 	private Vector<Annotation> annotations;
 	private Vector<Observation> observations;
-	// private User user;
-	// private Date date;
 
 	/*
 	 * ACCESSEURS

@@ -24,7 +24,6 @@ public class Global extends GlobalSettings
 			MorphiaObject.mongo = new Mongo("linus.mongohq.com", 10076);
 			//MorphiaObject.mongo = new Mongo("localhost", 27017);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -33,19 +32,10 @@ public class Global extends GlobalSettings
 		MorphiaObject.morphia.map(Annotation.class);
 		MorphiaObject.morphia.map(Video.class);
 		MorphiaObject.morphia.map(Quadrant.class);
-
-		/*
-		MorphiaObject.morphia.mapPackageFromClass(Annotation.class);
-		MorphiaObject.morphia.mapPackageFromClass(Video.class);
-		MorphiaObject.morphia.mapPackageFromClass(Timecode.class);
-		MorphiaObject.morphia.mapPackageFromClass(User.class);
-		MorphiaObject.morphia.mapPackageFromClass(Intervenant.class);
-		*/
 		
 		MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "TERannot", "ter", "1234".toCharArray());
 		//MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "TERannot");
 
-		//MorphiaObject.fs = new GridFS(MorphiaObject.datastore.getDB(), "Video");
 		//MorphiaObject.datastore.ensureCaps();
 		
 		MorphiaObject.datastore.ensureIndexes();

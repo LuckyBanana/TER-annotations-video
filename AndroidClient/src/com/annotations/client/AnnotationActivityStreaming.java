@@ -1,6 +1,5 @@
 package com.annotations.client;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +18,7 @@ import org.json.JSONObject;
 
 import quadrants.QuadrantActivity;
 import restclient.AnnotationsRESTClientUsage;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -49,7 +49,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-@SuppressWarnings("unused")
+@SuppressLint("HandlerLeak")
 public class AnnotationActivityStreaming extends Activity {
 
 	private final String LIST_ITEM_INDEX = "ListItemIndex";
@@ -64,6 +64,7 @@ public class AnnotationActivityStreaming extends Activity {
 	private ListView annotationsListView;
 	private ListView observationsListView;
 	private Map<String, String> observationsCodes = new HashMap<String, String>();
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -222,7 +223,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String cp;
 				try {
 					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
@@ -242,7 +242,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String cp;
 				try {
 					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
@@ -262,7 +261,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String cp;
 				try {
 					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
@@ -282,7 +280,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String cp;
 				try {
 					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
@@ -302,7 +299,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String cp;
 				try {
 					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
@@ -322,7 +318,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String cp;
 				try {
 					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
@@ -342,7 +337,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String cp;
 				try {
 					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
@@ -362,7 +356,6 @@ public class AnnotationActivityStreaming extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String cp;
 				try {
 					cp = java.lang.String.valueOf(vid.getCurrentPosition()).substring(0, java.lang.String.valueOf(vid.getCurrentPosition()).length()-3);
@@ -559,7 +552,7 @@ public class AnnotationActivityStreaming extends Activity {
 		observationsListView = (ListView)findViewById(R.id.list_observation_view);
 		Intent intent = getIntent();
 		String videoId = intent.getStringExtra(MainActivity.ID);
-		String result = client.getObservationsOnVideo(videoId);
+		client.getObservationsOnVideo(videoId);
 		JSONArray array = client.getJsonArray();
 		ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
 		HashMap<String, String> map;
@@ -587,7 +580,7 @@ public class AnnotationActivityStreaming extends Activity {
 		annotationsListView = (ListView)findViewById(R.id.list_annotation_view);
 		Intent intent = getIntent();
 		String videoId = intent.getStringExtra(MainActivity.ID);
-		String result = client.getAnnotationsOnVideo(videoId);
+		client.getAnnotationsOnVideo(videoId);
 		JSONArray array = client.getJsonArray();
 		ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
 		HashMap<String, String> map;
