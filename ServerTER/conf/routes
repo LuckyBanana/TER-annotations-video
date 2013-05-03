@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           	controllers.Application.index()
+
+
+OPTIONS /api/*url						controllers.Application.options(url: String)
+
+#Videos
+GET /api/video                          controllers.Videos.list()
+GET /api/video/:nameVideo				controllers.Videos.streaming(nameVideo: String)
+GET /api/video/:id/annotations		    controllers.Videos.getAnnotationsOnVideo(id: String)
+GET /api/video/:id/observations		    controllers.Videos.getObservationsOnVideo(id: String)
+GET /api/video/quadrant/:id				controllers.Videos.getQuadrant(id: String)
+POST /api/video						    controllers.Videos.upload()
+POST /api/video/:id				        controllers.Videos.saveBinary(id: String)
+DELETE /api/video/:id					controllers.Videos.delete(id: String)
+
+#Annotations
+GET /api/annotation                     controllers.Annotations.list()
+#GET /api/annotation/:id				controllers.Annotations.getById(id: String)
+POST /api/annotation/:id                controllers.Annotations.save(id: String)
+DELETE /api/annotation/:id				controllers.Annotations.delete(id: String)
+
+#Observations
+GET /api/observation                     controllers.Observations.list()
+POST /api/observation/:id                controllers.Observations.save(id: String)
+
+#Users
+#GET /api/user                	        controllers.Users.list()
+#POST /api/user               	        controllers.User.createUser()
+
+# Map static resources from the /public folder to the /assets URL path
+GET /*file								controllers.Assets.at(path="/public", file)
