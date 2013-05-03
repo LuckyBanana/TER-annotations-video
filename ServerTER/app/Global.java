@@ -1,6 +1,9 @@
 //https://github.com/natoine/Argumentea/blob/master/ArgumenteaServer/app/Global.java
 
-import java.net.UnknownHostException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 import models.Annotation;
 import models.Quadrant;
@@ -20,28 +23,54 @@ public class Global extends GlobalSettings
 	public void onStart(play.Application arg0) {
 		super.beforeStart(arg0);
 		Logger.debug("** onStart **");
+
+		
+		//MorphiaLoggerFactory.get(SLF4JLogrImplFactory.class);
+		//MorphiaLoggerFactory.registerLogger(SLF4JLogrImplFactory.class);
+
+		Properties prop = new Properties();
+		String url = "";
+		String port = "";
+		String db = "";
+
 		try {
-			MorphiaObject.mongo = new Mongo("linus.mongohq.com", 10076);
-			//MorphiaObject.mongo = new Mongo("localhost", 27017);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
+
+			prop.load(new FileInputStream("conf/prod.properties"));
+			url = prop.getProperty("url");
+			port = prop.getProperty("port");
+			db = prop.getProperty("db");
+
+			System.out.println(url+" "+port+" "+db);
+
+			/*
+				prop.load(new FileInputStream("dev.properties"));
+				url = prop.getProperty("url");
+				port = prop.getProperty("port");
+				db = prop.getProperty("db");
+				id = prop.getProperty("id");
+				pw = prop.getProperty("pw");
+			 */
+
+			MorphiaObject.mongo = new Mongo(url, Integer.parseInt(port));
+			MorphiaObject.morphia = new Morphia();
+			MorphiaObject.morphia.map(Annotation.class);
+			MorphiaObject.morphia.map(Video.class);
+			MorphiaObject.morphia.map(Quadrant.class);
+
+			MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, db);
+
+
+			//MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, db, id, pw.toCharArray());
+
+
+			MorphiaObject.datastore.ensureIndexes();
+			//MorphiaObject.datastore.ensureCaps();
 		}
-		
-		MorphiaObject.morphia = new Morphia();
-		
-		MorphiaObject.morphia.map(Annotation.class);
-		MorphiaObject.morphia.map(Video.class);
-		MorphiaObject.morphia.map(Quadrant.class);
-		
-		MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "TERannot", "ter", "1234".toCharArray());
-		//MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(MorphiaObject.mongo, "TERannot");
-
-		//MorphiaObject.datastore.ensureCaps();
-		
-		MorphiaObject.datastore.ensureIndexes();
-		
-
-
+		catch (FileNotFoundException e) {
+			System.err.println("Configuration files not found.");
+		} catch (IOException e) {
+			System.err.println("Configuration files not found.");
+		}
 
 	}
 }
