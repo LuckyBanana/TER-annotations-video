@@ -1,9 +1,0 @@
----
-applications:
-- name: ter-server
-  framework: play
-  runtime: java7
-  memory: 256M
-  instances: 1
-  url: ter-server.${target-base}
-  path: dist/serverter-1.0-SNAPSHOT.zip
