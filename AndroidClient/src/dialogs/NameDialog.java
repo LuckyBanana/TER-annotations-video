@@ -39,8 +39,8 @@ public class NameDialog extends DialogFragment {
 
 				if(!result.equals("")) {
 					video.setId(result);
-					//String videoId = result;
-					//client.postStream(video.getId(), video.getStream());
+					String videoId = result;
+					client.postStream(video.getId(), video.getStream());
 					Intent i = new Intent(getActivity(), AnnotationActivity.class);
 					i.putExtra(MainActivity.ID, video.getId());
 					i.putExtra(MainActivity.PATH, video.getPath());

@@ -7,7 +7,7 @@ import com.loopj.android.http.RequestParams;
 public class AnnotationsRESTClient {
 
 	//private static final String BASE_URL = "http://ter-server.cloudfoundry.com/";
-	private static final String BASE_URL = "http://ter-server.herokuapp.com/";
+	private static final String BASE_URL = "http://91.121.65.184:9000/";
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
 

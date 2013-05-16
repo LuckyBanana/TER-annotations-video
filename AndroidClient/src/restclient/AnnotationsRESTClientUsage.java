@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -306,7 +307,7 @@ public class AnnotationsRESTClientUsage {
 			e.printStackTrace();
 		}
 
-		return "http://ter-server.herokuapp.com/quadrant/"+id+".png";
+		return "http://91.121.65.184:9000/quadrant/"+id+".png";
 	}
 
 	public String postVideo(Video v) {
@@ -345,18 +346,24 @@ public class AnnotationsRESTClientUsage {
 
 		//POST api/video/:id
 		RequestParams params = new RequestParams();
-
+		Log.d("stream", id);
 		try {
 			params.put("stream", f);
 			AnnotationsRESTClient.post("api/video/"+id, params, new JsonHttpResponseHandler() {
+		
+				@Override
+				public void onStart() {
+					Log.d("stream", "start");
+				}
+				
 				@Override
 				public void onSuccess(JSONArray response) {
-					Toast.makeText(activity, "Upload started", Toast.LENGTH_SHORT).show();
+					Log.d("stream", "success");
 				}
 
 				@Override
 				public void onFinish() {
-					Toast.makeText(activity, "File uploaded", Toast.LENGTH_SHORT).show();
+					Log.d("stream", "finish");
 				}
 			});
 		} catch (FileNotFoundException e) {

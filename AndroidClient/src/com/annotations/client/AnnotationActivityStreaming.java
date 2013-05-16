@@ -501,13 +501,14 @@ public class AnnotationActivityStreaming extends Activity {
 
 	public void videoInit(String path, final VideoView vid) {
 		MediaController mc = new MediaController(this);
-		String url = "http://ter-server.herokuapp.com/"+path;
+		String url = "http://91.121.65.184:9000/"+path;
 		System.out.println(url);
 		Uri uri = Uri.parse(url);
-
+		
+		
 		progressDialog = ProgressDialog.show(AnnotationActivityStreaming.this, "", "Chargement de la video...", true);
-		progressDialog.setCancelable(false);  
-
+		progressDialog.setCancelable(true);  
+		
 		mc.setAnchorView(vid);
 		vid.setMediaController(mc);
 		vid.setVideoURI(uri);
