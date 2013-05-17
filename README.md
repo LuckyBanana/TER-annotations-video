@@ -1,8 +1,8 @@
 TER M1 2012 - 2013 : Annotation de video de Judo
-
+================================================
 Deux parties :
 
-Serveur développé avec Play Framework : http://www.playframework.com/
+Serveur Play Framework : http://www.playframework.com/
 Client Android : http://www.android.com/
 
 Librairies :
