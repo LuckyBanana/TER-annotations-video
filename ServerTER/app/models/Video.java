@@ -82,7 +82,7 @@ public class Video {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
+
 	/*
 	 * Renvoie la liste de tous les quadrants issus des annotations.
 	 */
@@ -92,7 +92,14 @@ public class Video {
 		for(Annotation a : getAnnotations()) {
 			Quadrant qd = a.getQuadrant();
 			qd.getMap().put("an", getAnnotations().indexOf(a));
-			quadrants.add(qd);
+			try {
+				if(qd.getMap().get("x") != 0);
+				quadrants.add(qd);
+			}
+			catch(NullPointerException npe) {
+
+			}
+
 		}
 		return quadrants;
 	}
@@ -126,7 +133,7 @@ public class Video {
 
 				g.drawString("["+getAnnotations().get(quadrant.getMap().get("an")).getTimecodeDebut()+" , "+
 						getAnnotations().get(quadrant.getMap().get("an")).getTimecodeFin()+"]", x, y);
-				
+
 				//Translation des points dans un repere avec pour origine le point (600, 400)
 				trans.put(new Point((int)x-600,(int)y-400), (float) Math.toDegrees(Math.atan((y-400)/(x-600))));
 			}

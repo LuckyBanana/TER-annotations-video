@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TER Annotation Video</title>
+    </head>
+    <body>
+        <h1>REST API</h1>
+		<h2>Videos</h2>
+		
+		<table>
+		<tr>
+		<td>
+		<a href="html/api.video.html">GET /api/video</a>
+		</td>
+		<td>
+		Liste l'ensemble des informations des vidéos présentes sur le serveur.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<a href="html/api.video.streaming.html">GET /api/video/:nameVideo</a>
+		</td>
+		<td>
+		Permet de lancer l'interface web de streaming vidéo.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<a href="html/api.video.annotations.html">GET /api/video/:id/annotations</a>
+		</td>
+		<td>
+		Liste l'ensemble des annotations d'une vidéo donnée.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<a href="html/api.video.observations.html">GET /api/video/:id/observations</a>
+		</td>
+		<td>
+		Liste l'ensemble des observations d'une vidéo donnée.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<a href="html/api.video.quadrant.html">GET /api/video/quadrant/:id</a>
+		</td>
+		<td>
+		Obtenir le quadrant d'une vidéo donnée.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<a href="html/api.video.post.html">POST /api/video</a>
+		</td>
+		<td>
+		Référencer une vidéo sur le serveur.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<a href="html/api.video.postbinary.html">POST /api/video/:id</a>
+		</td>
+		<td>
+		Associer à une vidéo des données binaires.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<a href="html/api.video.delete.html">DELETE /api/video/:id</a>
+		</td>
+		<td>
+		Supprimer une vidéo donnée.
+		</td>
+		</tr>
+		</table>
+
+		<h2>Annotations</h2>
+		<table>
+		<tr>
+		<td>
+		<a href="html/api.annotation.html">GET /api/annotation</a>
+		</td>
+		<td>
+		Lister toutes les annotations du serveur.
+		</td>
+		<tr>
+		<td>
+		<a href="html/api.annotation.post.html">POST /api/annotation/:id</a>
+		</td>
+		<td>
+		Poster une annotation sur une vidéo donnée.
+		</td>
+		<tr>
+		<td>
+		<a href="html/api.annotation.delete.html">DELETE /api/annotation/:id</a>
+		</td>
+		<td>
+		Supprimer une annotation donnée.
+		</td>
+		</table>
+		<h2>Observations</h2>
+		<table>
+		<tr>
+		<td>
+		<a href="html/api.observation.html">GET /api/observation</a>
+		</td>
+		<td>
+		Lister toutes les observations du serveur.
+		</td>
+		<tr>
+		<td>
+		<a href="html/api.observation.post.html">POST /api/observation/:id</a>
+		</td>
+		<td>
+		Poster une observation sur une vidéo donnée.
+		</td>
+		</table>
+		
+    </body>
+</html>

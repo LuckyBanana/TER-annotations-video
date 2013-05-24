@@ -20,17 +20,12 @@ DELETE /api/video/:id					controllers.Videos.delete(id: String)
 
 #Annotations
 GET /api/annotation                     controllers.Annotations.list()
-#GET /api/annotation/:id				controllers.Annotations.getById(id: String)
 POST /api/annotation/:id                controllers.Annotations.save(id: String)
 DELETE /api/annotation/:id				controllers.Annotations.delete(id: String)
 
 #Observations
 GET /api/observation                     controllers.Observations.list()
 POST /api/observation/:id                controllers.Observations.save(id: String)
-
-#Users
-#GET /api/user                	        controllers.Users.list()
-#POST /api/user               	        controllers.User.createUser()
 
 # Map static resources from the /public folder to the /assets URL path
 GET /*file								controllers.Assets.at(path="/public", file)

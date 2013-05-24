@@ -98,8 +98,10 @@ public class Quadrant {
 	
 	public static Color quelleDominante(int x, int y, List<Quadrant> quadrants) {
 		int max = 0;
-		String code = "";
-		for(Quadrant map : quadrants) {
+		String code = "Red";
+		//for(Quadrant map : quadrants) {
+		for(int i = 0; i < quadrants.size(); i++) {
+			Quadrant map = quadrants.get(i);
 			if(map.getMap().get("x") == x) {
 				if(map.getMap().get("y") == y) {
 					max = map.getMap().get("volonte");

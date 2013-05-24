@@ -1,0 +1,15 @@
+body {
+	
+}
+
+div#params {
+	min-height: 10px;
+	min-width: 10px;
+	background-color: #FDFCDC;
+}
+
+div#code {
+	min-height: 10px;
+	min-width: 10px;
+	background-color: #ECF1EF;
+}

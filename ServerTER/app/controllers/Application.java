@@ -2,6 +2,7 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.doc;
 
 public class Application extends Controller  {
 
@@ -9,7 +10,7 @@ public class Application extends Controller  {
 
 	public static Result index() throws Exception {
 
-		return ok("<h1>QUADRANT</h1>").as("text/html");
+		return ok(doc.render());
 	}
 
 

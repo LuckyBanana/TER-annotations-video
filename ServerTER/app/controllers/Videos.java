@@ -71,7 +71,7 @@ public class Videos  extends Controller{
 		}
 		return ok("Error : Unknown Id");
 	}
-	
+
 	public static Result getObservationsOnVideo(String id) {
 		List<Video> res = MorphiaObject.datastore.find(Video.class).asList();
 		for(Video v : res) {
@@ -88,7 +88,7 @@ public class Videos  extends Controller{
 				v.genererQuadrant();
 			}
 		}
-		
+
 		return ok("<img src=\"public/quadrant/"+id+".png\">quadrant</img>").as("text/html");
 	}
 
@@ -111,8 +111,7 @@ public class Videos  extends Controller{
 	public static Result upload() {
 
 		Form<Video> form = Form.form(Video.class).bindFromRequest();
-		//DynamicForm df = Form.form().bindFromRequest();
-		
+
 		String result = "";
 		if(form.hasErrors() || form.get().getNom() == null) {
 			return ok("Error : Must specify name.");
@@ -128,55 +127,69 @@ public class Videos  extends Controller{
 	public static Result saveBinary(String id) {
 
 		MultipartFormData body = request().body().asMultipartFormData();
-		
+
 		FilePart video = body.getFile("stream");
 		ObjectId oid = new ObjectId(id);
 		//String oid = id;
 
 		UpdateOperations<Video> ops;
 		Query<Video> updateQuery = MorphiaObject.datastore.createQuery(Video.class).field("_id").equal(oid);
-		
+
 		Encoder encoder = new Encoder();
 
 
 		if(video != null) {
 			File file = video.getFile();
-			File output = new File("output.3gp");
-			AudioAttributes audioAtt = new AudioAttributes();
-			audioAtt.setCodec("libfaac");
-			audioAtt.setBitRate(new Integer(128000));
-			audioAtt.setSamplingRate(new Integer(44100));
-			audioAtt.setChannels(new Integer(2));
-			VideoAttributes videoAtt = new VideoAttributes();
-			videoAtt.setCodec("mpeg4");
-			videoAtt.setBitRate(new Integer(1600000));
-			videoAtt.setFrameRate(new Integer(30));
-			EncodingAttributes attributes = new EncodingAttributes();
-			attributes.setFormat("3gp");
-			attributes.setAudioAttributes(audioAtt);
-			attributes.setVideoAttributes(videoAtt);
-			
-			try {
-				encoder.encode(file, output, attributes);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InputFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (EncoderException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(!file.getName().substring(file.getName().lastIndexOf(".")).equalsIgnoreCase("3gp")) {
+				File output = new File("output.3gp");
+				AudioAttributes audioAtt = new AudioAttributes();
+				audioAtt.setCodec("libfaac");
+				audioAtt.setBitRate(new Integer(128000));
+				audioAtt.setSamplingRate(new Integer(44100));
+				audioAtt.setChannels(new Integer(2));
+				VideoAttributes videoAtt = new VideoAttributes();
+				videoAtt.setCodec("mpeg4");
+				videoAtt.setBitRate(new Integer(160000));
+				videoAtt.setFrameRate(new Integer(30));
+				EncodingAttributes attributes = new EncodingAttributes();
+				attributes.setFormat("3gp");
+				attributes.setAudioAttributes(audioAtt);
+				attributes.setVideoAttributes(videoAtt);
+
+				try {
+					encoder.encode(file, output, attributes);
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InputFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (EncoderException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String path = "public"+File.separator+"video"+File.separator+id+".3gp";
+				String url = "video/"+id+".3gp";
+				output.renameTo(new File(path));
+				file.delete();
+				output.delete();
+				ops = MorphiaObject.datastore.createUpdateOperations(Video.class).set("path", url);
+				UpdateResults<Video> ur = MorphiaObject.datastore.update(updateQuery, ops);
+				return ok(ur.getWriteResult().toString());
 			}
+			else {
+				String path = "public"+File.separator+"video"+File.separator+id+".3gp";
+				String url = "video/"+id+".3gp";
+				file.renameTo(new File(path));
+				file.delete();
+				//output.delete();
+				ops = MorphiaObject.datastore.createUpdateOperations(Video.class).set("path", url);
+				UpdateResults<Video> ur = MorphiaObject.datastore.update(updateQuery, ops);
+				return ok(ur.getWriteResult().toString());
+			}
+
+
 			
-			String path = "public"+File.separator+"video"+File.separator+id+".3gp";
-			String url = "video/"+id+".3gp";
-			output.renameTo(new File(path));
-			file.delete();
-			output.delete();
-			ops = MorphiaObject.datastore.createUpdateOperations(Video.class).set("path", url);
-			UpdateResults<Video> ur = MorphiaObject.datastore.update(updateQuery, ops);
-			return ok(ur.getWriteResult().toString());
 		}
 
 
